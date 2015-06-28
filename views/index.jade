@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  .container
+    .row
+      .medium-12.columns
+        p The Glazebook
+        p Join or log in to save and share your glaze recipes.
+  
+    .row  
+      .medium-6.columns
+        p Sign Up
+        form(action='/signup' method='post')
+          input(type='text' placeholder='First Name' name='first_name')
+          input(type='text' placeholder='Last Name' name='last_name')
+          p
+          input(type='text' placeholder='Email' name='signup_email')
+          p
+          input(type='password' placeholder='Password' name='signup_password')
+          input(type='password' placeholder='Confirm Password' name='signup_confirm')
+          p
+          if signupError
+            input(type='submit' value='Sign Up')
+            span= signupError
+          else      
+            input(type='submit' value='Sign Up')
+ 
+          
+      .medium-6.columns
+        p Sign In
+        form(action='/login' method='post')
+          input(type='text' placeholder='Email' name='login_email')
+          p
+          input(type='password' placeholder='Password' name='login_password')
+          p
+          if loginError
+            input(type='submit' value='Log In')
+            span= loginError
+          else      
+            input(type='submit' value='Log In')        
+        
+
+
+
+
+
+
+
+
+
+
+//
