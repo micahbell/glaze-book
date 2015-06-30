@@ -1,0 +1,10 @@
+form(action='/login' method='post')
+  input(type='email' placeholder='Email' name='login_email' value=email)
+  p
+  input(type='password' placeholder='Password' name='login_password')
+  p
+  input(type='submit' value='Log In')
+for val in loginError
+  p.errors= val
+  //- p  
+  //- a(href='') Forgot your password?

@@ -10,3 +10,7 @@ a {
 .columns {
   border: 1px solid black;
 }
+
+p.errors {
+  color: red;
+}

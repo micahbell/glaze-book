@@ -1,0 +1,13 @@
+form(action='/signup' method='post')
+  input(type='text' placeholder='Username' name='username' value=username required)
+  p
+  input(type='email' placeholder='Email' name='signup_email' value=email required)
+  p
+  input(type='password' placeholder='Password' name='signup_password' required)
+  p
+  input(type='password' placeholder='Confirm Password' name='signup_confirm' required)
+  p    
+  input(type='submit' value='Sign Up')
+  
+  for val in signupError
+    p.errors= val
