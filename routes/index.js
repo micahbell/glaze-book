@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('monk')(process.env.MONGO);
+var db = require('monk')(process.env.MONGOLAB_URI);
 var userCollection = db.get('users');
 var bcrypt = require('bcryptjs');
 var userValidation = require('../lib/user-validation');
