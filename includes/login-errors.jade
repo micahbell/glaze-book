@@ -4,7 +4,7 @@ form(action='/login' method='post')
   input(type='password' placeholder='Password' name='login_password')
   p
   input(type='submit' value='Log In')
-for val in loginError
-  p.errors= val
+if loginError
+  p.errors= loginError
   //- p  
   //- a(href='') Forgot your password?
