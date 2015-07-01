@@ -9,8 +9,14 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+  // put an if statement that will only allow "logged in" users to visit this page
 router.get('/glazes', function(req, res, next) {
-  res.render('glazes');
+  if(req.cookies.currentUser) {
+    var userCookie = req.cookies.currentUser;
+    res.render('glazes', { currentUser: userCookie });
+  } else {
+    res.redirect('/glazes');
+  }
 });
 
 router.post('/signup', function(req, res, next) {
@@ -28,36 +34,57 @@ router.post('/signup', function(req, res, next) {
         userCollection.insert({
           username: username,
           email: email,
-          password: hash
+          password: hash,
+          glazeRecipes: []
         });
+        res.cookie('currentUser', username )
         res.redirect('/glazes');
     };
   });
 });
 
+// router.post('/login', function(req, res, next) {
+//   var email = req.body.login_email.toLowerCase().trim();
+//   var password = req.body.login_password.trim();
+//
+//   userValidation.loginUser(email, password, function(openSesame, user) {
+//     var validate = userValidation.loginValidation(email, password, openSesame);
+//     if(validate.length != 0) {
+//       res.render('index', { loginError: validate, email: email });
+//     } else if (validate.length === 0) {
+//       // res.cookie('currentUser', user);
+//       // res.render('glazes', { currentUser: user});
+//       res.redirect('/glazes');
+//     };
+//   });
+// });
+
 router.post('/login', function(req, res, next) {
   var email = req.body.login_email.toLowerCase().trim();
   var password = req.body.login_password.trim();
+  // var validate = userValidation.loginValidation(email, password);
 
-  userValidation.loginUser(email, password, function(openSesame, user) {
-    console.log(user);
-    var validate = userValidation.loginValidation(email, password, openSesame);
-    if(validate.length != 0) {
-      res.render('index', { loginError: validate, email: email });
-    } else if (validate.length === 0) {
-      // res.cookie('currentUser', user);
-      // res.render('glazes', { currentUser: user});
-      res.redirect('/glazes');
+  userCollection.findOne({ email: email }, function(err, user) {
+    if(!user) {
+      res.render('index', { loginError: 'No account associated with this email, please create an account.', email: email })
+    } else if(user) {
+      var compare = bcrypt.compareSync(password, user.password);
+      if(compare) {
+        res.cookie('currentUser', user.username);
+        res.redirect('/glazes');
+      } else {
+        res.render('index', { loginError: 'Invalid password.' })
+      };
     };
   });
 });
 
 
 //Can't set headers after they are sent?
-// router.post('/logout', function(req, res, next) {
-//   res.clearCookie('currentUser');
-//   res.redirect('/index');
-// });
+router.post('/logout', function(req, res, next) {
+  res.clearCookie('currentUser');
+  res.redirect('/');
+});
 
 // router.post('/add-new', function(req, res, next) {
 //   res.render('glazes', { addNewContent: ??????? });
