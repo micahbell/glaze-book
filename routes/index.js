@@ -45,8 +45,8 @@ router.post('/login', function(req, res, next) {
     if(validate.length != 0) {
       res.render('index', { loginError: validate, email: email });
     } else if (validate.length === 0) {
-      res.cookie('currentUser', user);
-      res.render('glazes', { currentUser: user});
+      // res.cookie('currentUser', user);
+      // res.render('glazes', { currentUser: user});
       res.redirect('/glazes');
     };
   });
@@ -57,6 +57,10 @@ router.post('/login', function(req, res, next) {
 // router.post('/logout', function(req, res, next) {
 //   res.clearCookie('currentUser');
 //   res.redirect('/index');
+// });
+
+// router.post('/add-new', function(req, res, next) {
+//   res.render('glazes', { addNewContent: ??????? });
 // });
 
 
