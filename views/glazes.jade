@@ -28,8 +28,25 @@ block content
         p Dynamic Content - Surface/ Cone
           
       .medium-7.columns
-        include ../includes/add-new
-        //- include ../includes/show
+        if allRecipes 
+          include ../includes/glazes/show-all
+        else
+          include ../includes/glazes/new
+        //- include ../includes/glazes/show-all
+        
+        
+        //On signin, with no recipes, 
+        //Render some placeholder content -- start adding recipes
+        //else if recipe
+        //Render show-all page
+        //If click on recipe
+        //Render show-one
+        //If edit
+        //render edit page with data prepopulated
+        //if delete
+        //render show-all page
+        //If new
+        //render new page
 
 
 

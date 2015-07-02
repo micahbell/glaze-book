@@ -11,7 +11,7 @@ block content
       .medium-6.columns
         p Sign Up (All fields are required)
         if signupError  
-          include ../includes/signup-errors
+          include ../includes/users/signup-errors
         else
           form(action='/signup' method='post')
             input(type='text' placeholder='Username' name='username')
@@ -27,7 +27,7 @@ block content
       .medium-6.columns
         p Log In
         if loginError
-          include ../includes/login-errors
+          include ../includes/users/login-errors
         else
           form(action='/login' method='post')
             input(type='email' placeholder='Email' name='login_email')
