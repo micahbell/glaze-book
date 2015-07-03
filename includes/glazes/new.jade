@@ -1,3 +1,6 @@
+.row
+  .medium-12.columns
+    h2 Add a Glaze Recipe
 
 .row
   .medium-12.columns
@@ -16,9 +19,9 @@
           p
           label(for='temp-range') Temperature Range
           select(id='temp-range' name='temp_range')
-            option Low Fire (∆04 - ∆1)
-            option Mid Range (∆4 - ∆6)
-            option High Fire (∆6 - ∆10)
+            option Low Fire
+            option Mid Range
+            option High Fire
           p
           label(for='cone') Cone
           select(id='cone' name='cone')
@@ -198,7 +201,8 @@
             p
             //Dom FileUpload??
             label(for='image') Upload Image
-            input(type='text' id='image' placeholder='Select File' name='image')
+            p
+            input(type='file' id='image' placeholder='Select File' name='image')
             p
             input(type='submit' value="Add New Recipe")
             p

@@ -11,7 +11,7 @@ block content
           input(type='submit' value='©')
     
     .row
-      .medium-1.columns
+      .medium-1.columns.main-content
         if currentUser
           p #{currentUser}
           form(action='/logout' method='post')
@@ -20,33 +20,34 @@ block content
         p Firing Temp
         p Surface
         
-      .medium-4.columns
-        p All Recipes
+      .medium-4.columns.main-content
+        a(href='/glazes/show-all') All Recipes
         p Favorites
         p Recently Added
         hr
         p Dynamic Content - Surface/ Cone
           
-      .medium-7.columns
-        if allRecipes 
+      .medium-7.columns.main-content
+        if recipe 
           include ../includes/glazes/show-all
+        else if oneRecipe
+          include ../includes/glazes/show-one
         else
           include ../includes/glazes/new
-        //- include ../includes/glazes/show-all
         
         
         //On signin, with no recipes, 
         //Render some placeholder content -- start adding recipes
         //else if recipe
         //Render show-all page
+        //If click add
+        // Render new page
         //If click on recipe
         //Render show-one
         //If edit
         //render edit page with data prepopulated
         //if delete
         //render show-all page
-        //If new
-        //render new page
 
 
 
