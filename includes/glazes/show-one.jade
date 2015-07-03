@@ -1,6 +1,131 @@
-for val in oneRecipe
-  .row
-    .medium-10.columns
-      h2= val.title
-    .medium-2.columns
-      a(href='/glazes') ADD
+.row
+  .medium-9.columns
+    h2 #{oneRecipe.title}
+  .medium-3.columns
+    a(href='/glazes') ADD 
+    a(href='') EDIT
+
+.row
+  if oneRecipe
+    table
+      tr
+        td Temperature Range
+        td #{oneRecipe.tempRange}
+      tr
+        td Cone
+        td #{oneRecipe.cone}
+      tr
+        td Type of Firing
+        td #{oneRecipe.firingType}
+      tr
+        td Surface
+        td #{oneRecipe.surface}
+      tr
+        td Opacity
+        td #{oneRecipe.opacity}
+      tr
+        td Color
+        td #{oneRecipe.color}
+      tr
+        td Specialty Glaze
+        td #{oneRecipe.specialty}
+      tr
+        td INGREDIENTS
+      if ingredients[0]
+        td #{ingredients[0]}
+      if ingredients[1]
+        td #{ingredients[1]}
+      if ingredients[2]
+        td #{ingredients[2]}
+      if ingredients[3]
+        td #{ingredients[3]}
+      if ingredients[4]
+        td #{ingredients[4]}
+      if ingredients[5]
+        td #{ingredients[5]}
+      if ingredients[6]
+        td #{ingredients[6]}
+      if ingredients[7]
+        td #{ingredients[7]}
+      if ingredients[8]
+        td #{ingredients[8]}
+      if ingredients[9]
+        td #{ingredients[9]}
+      if ingredients[10]
+        td #{ingredients[10]}
+      tr
+        td Amount
+        if amounts[0]
+          td #{amounts[0]}
+        if amounts[1]
+          td #{amounts[1]}
+        if amounts[2]
+          td #{amounts[2]}
+        if amounts[3]
+          td #{amounts[3]}
+        if amounts[4]
+          td #{amounts[4]}
+        if amounts[5]
+          td #{amounts[5]}
+        if amounts[6]
+          td #{amounts[6]}
+        if amounts[7]
+          td #{amounts[7]}
+        if amounts[8]
+          td #{amounts[8]}
+        if amounts[9]
+          td #{amounts[9]}
+        if amounts[10]
+          td #{amounts[10]}
+        tr
+          td ADD INGREDIENTS
+        if addIngredients[0]
+          td #{addIngredients[0]}
+        if addIngredients[1]
+          td #{addIngredients[1]}
+        if addIngredients[2]
+          td #{addIngredients[2]}
+        if addIngredients[3]
+          td #{addIngredients[3]}
+        if addIngredients[4]
+          td #{addIngredients[4]}
+        if addIngredients[5]
+          td #{addIngredients[5]}
+        if addIngredients[6]
+          td #{addIngredients[6]}
+        tr
+          td Add Amount
+          if addAmounts[0]
+            td #{addAmounts[0]}
+          if addAmounts[1]
+            td #{addAmounts[1]}
+          if addAmounts[2]
+            td #{addAmounts[2]}
+          if addAmounts[3]
+            td #{addAmounts[3]}
+          if addAmounts[4]
+            td #{addAmounts[4]}
+          if addAmounts[5]
+            td #{addAmounts[5]}
+          if addAmounts[6]
+            td #{addAmounts[6]}
+      tr
+        td Tested
+        td #{oneRecipe.tested}
+      tr
+        td Notes
+        td #{oneRecipe.notes}
+      tr
+        td Image
+        td #{oneRecipe.image}
+
+
+
+
+
+
+
+
+
+
+//
