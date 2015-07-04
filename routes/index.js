@@ -43,7 +43,7 @@ router.get('/glazes/:id', function(req, res, next) {
       var recipeID = req.params.id;
       var recipeArray = oneRecipe.glazeRecipes;
       var recipe = database.recipeFinder(recipeID, recipeArray);
-      console.log(recipe.ingredients);
+      // console.log(recipe.ingredients);
       var ingredients = recipe.ingredients;
       var amounts = recipe.amounts;
       var addIngredients = recipe.addIns;
@@ -138,7 +138,6 @@ router.post('/logout', function(req, res, next) {
 router.post('/show-all', function(req, res, next) {
   var date = Date();
   var recipeID = userCollection.id();
-  var userCookie = req.cookies.currentUser;
   var emailCookie = req.cookies.userEmail;
   userCollection.update({ email: emailCookie },
     { $push:
@@ -208,12 +207,25 @@ router.post('/show-all', function(req, res, next) {
 // });
 
 router.post('/glazes/:id/delete', function(req, res, next) {
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function(err, recipe) {
+    var recipeID = req.params.id;
+    var recipeArray = recipe.glazeRecipes;
+    var recipe = database.recipeFinder(recipeID, recipeArray);
+    var title = recipe.title;
+    userCollection.update({ email: emailCookie },
+      { $pull:
+        { glazeRecipes:
+          { title: title }
+        }
+      }
+    );
+  });
   res.redirect('/glazes/show-all');
 });
 
-// router.get('/glazes/delete', function(req, res, next) {
-//   res.render('glazes');
-// });
+
+
 
 
 
