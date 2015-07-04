@@ -4,7 +4,7 @@
 
 .row
   .medium-12.columns
-    form(action='/show-all' method='post')
+    form(action='/glazes/' + manyRecipes._id + '/edit' method='post')
       .row  
         .medium-10.columns
           p
@@ -163,7 +163,7 @@
             p
             input(type='file' id='image' placeholder='Select File' name='image')
             p
-            input(type='submit' value="Add New Recipe")
+            input(type='submit' value="Update Recipe")
             p
   
   
