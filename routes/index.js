@@ -68,6 +68,7 @@ router.get('/glazes/:id/edit', function(req, res, next) {
       var amounts = recipe.amounts;
       var addIngredients = recipe.addIns;
       var addAmounts = recipe.addAmounts;
+      // console.log(recipe);
       if(editRecipe) {
         res.render('glazes', { editRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
       }
