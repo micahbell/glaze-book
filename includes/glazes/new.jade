@@ -8,8 +8,8 @@
       .row  
         .medium-10.columns
           p
-          label(for='title') Title
-          input(type='text' id='title' name='title')
+          label(for='title') Title*
+          input(type='text' id='title' name='title' required)
         .medium-2.columns
           label(for='favorite') Fav 
           input(type='checkbox' id='favorite' name='favorite')
@@ -17,14 +17,16 @@
       .row
         .medium-12.columns
           p
-          label(for='temp-range') Temperature Range
-          select(id='temp-range' name='temp_range')
+          label(for='temp-range') Temperature Range*
+          select(id='temp-range' name='temp_range' reqired)        
+            option(disabled selected) Choose Temperature Range
             option Low Fire
             option Mid Range
             option High Fire
           p
-          label(for='cone') Cone
-          select(id='cone' name='cone')
+          label(for='cone') Cone*
+          select(id='cone' name='cone' required)
+            option(disabled selected) Choose Cone
             option ∆ 022
             option ∆ 021
             option ∆ 020
@@ -63,8 +65,9 @@
             option ∆ 14
             option ∆ 15
           p
-          label(for='firing-type') Type of Firing
-          select(id='firing-type' name='firing_type')
+          label(for='firing-type') Type of Firing*
+          select(id='firing-type' name='firing_type' required)
+            option(disabled selected) Choose Firing Type
             option Oxidation
             option Reduction
             option Raku
@@ -73,22 +76,25 @@
             option  Lustre
             option  Saggar
           p
-          label(for='surface') Surface
-          select(id='surface' name='surface')
+          label(for='surface') Surface*
+          select(id='surface' name='surface' required)
+            option(disabled selected) Choose Surface
             option Shiny or Glossy
             option Semi-Gloss
             option Semi-Matte or Satin
             option Matte
             option Dry Matte
           p
-          label(for='opacity') Opacity
-          select(id='opacity' name='opacity')
+          label(for='opacity') Opacity*
+          select(id='opacity' name='opacity' required)
+            option(disabled selected) Choose Opacity
             option Transparent
             option Translucent
             option Opaque
           p
-          label(for='color') Color
-          select(id='color' name='color')
+          label(for='color') Color*
+          select(id='color' name='color' required)
+            option(disabled selected) Choose Color
             option No Color
             option White
             option Gray
@@ -98,12 +104,13 @@
             option Orange
             option Yellow
             option Green
-            option Blue
             option Blue-Green
+            option Blue
             option Purple
           p
           label(for='specialty') Specialty Glaze
           select(id='specialty' name='specialty')
+            option(disabled selected) N/A
             option Crystalline
             option Metallic
             option Luster

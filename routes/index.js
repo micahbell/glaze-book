@@ -27,7 +27,7 @@ router.get('/glazes/show-all', function(req, res, next) {
       if(!record) {
         res.redirect('/glazes');
       } else {
-        res.render('glazes', { currentUser: userCookie, recipe: record.glazeRecipes });
+        res.render('glazes', { currentUser: userCookie, recipes: record.glazeRecipes });
       };
     });
   } else {
@@ -39,22 +39,50 @@ router.get('/glazes/:id', function(req, res, next) {
   if(req.cookies.currentUser) {
     var userCookie = req.cookies.currentUser;
     var emailCookie = req.cookies.userEmail;
-    userCollection.findOne({ email: emailCookie }, function(err, oneRecipe) {
+    userCollection.findOne({ email: emailCookie }, function(err, allRecipes) {
       var recipeID = req.params.id;
-      var recipeArray = oneRecipe.glazeRecipes;
+      var recipeArray = allRecipes.glazeRecipes;
       var recipe = database.recipeFinder(recipeID, recipeArray);
       var ingredients = recipe.ingredients;
       var amounts = recipe.amounts;
       var addIngredients = recipe.addIns;
       var addAmounts = recipe.addAmounts;
-      if(oneRecipe) {
-        res.render('glazes', { oneRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
+      if(allRecipes) {
+        console.log('++++++++++++++++++++',recipe);
+        res.render('glazes', { recipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
       };
     });
   } else {
       res.redirect('/');
   };
 });
+
+router.get('/glazes/:id/edit', function(req, res, next) {
+  if(req.cookies.currentUser) {
+    var userCookie = req.cookies.currentUser;
+    var emailCookie = req.cookies.userEmail;
+    userCollection.findOne({ email: emailCookie }, function(err, editRecipe) {
+      var recipeID = req.params.id;
+      var recipeArray = editRecipe.glazeRecipes;
+      var recipe = database.recipeFinder(recipeID, recipeArray);
+      var ingredients = recipe.ingredients;
+      var amounts = recipe.amounts;
+      var addIngredients = recipe.addIns;
+      var addAmounts = recipe.addAmounts;
+      if(editRecipe) {
+        res.render('glazes', { editRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
+      }
+    });
+  } else {
+      res.redirect('/');
+  }
+});
+//
+// router.get('/albums/:id/edit', function(req, res, next) {
+//   albumCollection.findOne({ _id: req.params.id }, function(err, record) {
+//     res.render('albums/edit', { theAlbum: record });
+//   });
+// });
 
 // Signup ====================
 
@@ -179,6 +207,9 @@ router.post('/show-all', function(req, res, next) {
   });
   res.redirect('/glazes/show-all');
 });
+
+
+
 
 
 

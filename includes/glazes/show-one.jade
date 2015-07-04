@@ -1,34 +1,35 @@
 .row
   .medium-9.columns
-    h2 #{oneRecipe.title}
+    h2 #{recipe.title}
   .medium-3.columns
     a(href='/glazes') ADD 
-    a(href='') EDIT
-
+    a(href='/glazes/' + recipe._id + '/edit') EDIT
+    
+    
 .row
-  if oneRecipe
+  if recipe
     table
       tr
         td Temperature Range
-        td #{oneRecipe.tempRange}
+        td #{recipe.tempRange}
       tr
         td Cone
-        td #{oneRecipe.cone}
+        td #{recipe.cone}
       tr
         td Type of Firing
-        td #{oneRecipe.firingType}
+        td #{recipe.firingType}
       tr
         td Surface
-        td #{oneRecipe.surface}
+        td #{recipe.surface}
       tr
         td Opacity
-        td #{oneRecipe.opacity}
+        td #{recipe.opacity}
       tr
         td Color
-        td #{oneRecipe.color}
+        td #{recipe.color}
       tr
         td Specialty Glaze
-        td #{oneRecipe.specialty}
+        td #{recipe.specialty}
       tr
         td INGREDIENTS
       if ingredients[0]
@@ -111,13 +112,13 @@
             td #{addAmounts[6]}
       tr
         td Tested
-        td #{oneRecipe.tested}
+        td #{recipe.tested}
       tr
         td Notes
-        td #{oneRecipe.notes}
+        td #{recipe.notes}
       tr
         td Image
-        td #{oneRecipe.image}
+        td #{recipe.image}
 
 
 

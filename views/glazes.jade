@@ -28,10 +28,12 @@ block content
         p Dynamic Content - Surface/ Cone
           
       .medium-7.columns.main-content
-        if recipe 
+        if recipes
           include ../includes/glazes/show-all
-        else if oneRecipe
+        else if recipe
           include ../includes/glazes/show-one
+        else if editRecipe
+          include ../includes/glazes/edit
         else
           include ../includes/glazes/new
 
