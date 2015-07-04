@@ -1,12 +1,13 @@
-.container {
-  margin-bottom: 3em;
-}
-
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: whitesmoke;
 }
 
+.container {
+  margin-bottom: 3em;
+  background-color: white;
+}
 a {
   color: #00B7FF;
 }

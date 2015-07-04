@@ -2,8 +2,10 @@
   .medium-9.columns
     h2 #{oneRecipe.title}
   .medium-3.columns
-    a(href='/glazes') ADD 
-    a(href='/glazes/' + oneRecipe._id + '/edit') EDIT
+    a(href='/glazes/' + oneRecipe._id + '/edit') EDIT | 
+    
+    form(action='/glazes/' + oneRecipe._id + '/delete' method='post')
+      input(type='submit' value="Delete")
 
 .row
   if oneRecipe

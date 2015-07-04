@@ -43,6 +43,7 @@ router.get('/glazes/:id', function(req, res, next) {
       var recipeID = req.params.id;
       var recipeArray = oneRecipe.glazeRecipes;
       var recipe = database.recipeFinder(recipeID, recipeArray);
+      console.log(recipe.ingredients);
       var ingredients = recipe.ingredients;
       var amounts = recipe.amounts;
       var addIngredients = recipe.addIns;
@@ -201,6 +202,18 @@ router.post('/show-all', function(req, res, next) {
   });
   res.redirect('/glazes/show-all');
 });
+
+// router.post('/glazes/:id/edit', function(req, res, next) {
+//   res.redirect('glazes/show-all');
+// });
+
+router.post('/glazes/:id/delete', function(req, res, next) {
+  res.redirect('/glazes/show-all');
+});
+
+// router.get('/glazes/delete', function(req, res, next) {
+//   res.render('glazes');
+// });
 
 
 

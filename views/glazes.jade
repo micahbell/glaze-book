@@ -5,7 +5,7 @@ block content
     .row  
       .medium-12.columns
         .medium-8.columns
-          p Header
+          p the glazebook
         .medium-4.columns
           input(type='text' placeholder='Search' name='search')
           input(type='submit' value='©')
@@ -16,7 +16,7 @@ block content
           p #{currentUser}
           form(action='/logout' method='post')
             input(type='submit' value='Logout')
-        p All Recipes
+        a(href='/glazes/show-all') All Recipes
         p Firing Temp
         p Surface
         
