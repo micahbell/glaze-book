@@ -56,6 +56,27 @@ router.get('/glazes/:id', function(req, res, next) {
   };
 });
 
+router.get('/glazes/:id/edit', function(req, res, next) {
+  if(req.cookies.currentUser) {
+    var userCookie = req.cookies.currentUser;
+    var emailCookie = req.cookies.userEmail;
+    userCollection.findOne({ email: emailCookie }, function(err, editRecipe) {
+      var recipeID = req.params.id;
+      var recipeArray = editRecipe.glazeRecipes;
+      var recipe = database.recipeFinder(recipeID, recipeArray);
+      var ingredients = recipe.ingredients;
+      var amounts = recipe.amounts;
+      var addIngredients = recipe.addIns;
+      var addAmounts = recipe.addAmounts;
+      if(editRecipe) {
+        res.render('glazes', { editRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
+      }
+    });
+  } else {
+      res.redirect('/');
+  }
+});
+
 // Signup ====================
 
 router.post('/signup', function(req, res, next) {
