@@ -8,7 +8,7 @@ block content
         p Join or log in to save and share your glaze recipes.
   
     .row  
-      .medium-6.columns
+      .medium-6.columns.main-content
         p Sign Up (All fields are required)
         if signupError  
           include ../includes/users/signup-errors
@@ -24,7 +24,7 @@ block content
             p
             input(type='submit' value='Sign Up')
           
-      .medium-6.columns
+      .medium-6.columns.main-content
         p Log In
         if loginError
           include ../includes/users/login-errors

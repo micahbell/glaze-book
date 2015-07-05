@@ -21,9 +21,15 @@ block content
         p Surface
         
       .medium-4.columns.main-content
-        a(href='/glazes/show-all') All Recipes
-        p Favorites
-        p Recently Added
+        p
+        a(href='/glazes/show-all') 
+          input(type='button' value='All Recipes')
+        p
+        form(action='/glazes/favorites' method='post')
+          input(type='submit' value='Favorites')
+        p 
+        form(action='' method='post')
+          input(type='submit' value='Recently Added')
         hr
         p Dynamic Content - Surface/ Cone
           
@@ -34,6 +40,8 @@ block content
           include ../includes/glazes/show-one
         else if editRecipe
           include ../includes/glazes/edit
+        else if favRecipes
+          include ../includes/glazes/favorites
         else
           include ../includes/glazes/new
 

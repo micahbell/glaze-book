@@ -1,125 +1,92 @@
+.row 
+  .medium-2.columns
+    .image
+      img(src='#{oneRecipe.image}')
+  .medium-6.columns
+    h1 #{oneRecipe.title}
+  .medium-4.columns
+    .row
+      .medium-2.columns.circle
+        //- a(href='/glazes/' + oneRecipe._id + '/edit') Edit
+      .medium-2.columns.circle
+        p Delete
 .row
-  .medium-9.columns
-    h2 #{oneRecipe.title}
-  .medium-3.columns
-    a(href='/glazes/' + oneRecipe._id + '/edit') EDIT | 
-    
-    form(action='/glazes/' + oneRecipe._id + '/delete' method='post')
-      input(type='submit' value="Delete")
-
+  .medium-4.columns.attributes
+    p Temperature Range 
+      br
+      &emsp; #{oneRecipe.tempRange}
+    p Cone 
+      br
+      &emsp; #{oneRecipe.cone}
+    p Type of Firing
+      br
+      &emsp; #{oneRecipe.firingType}
+    p Surface
+      br
+      &emsp; #{oneRecipe.surface}
+    p Opacity
+      br
+      &emsp; #{oneRecipe.opacity}
+    p Color 
+      br
+      &emsp; #{oneRecipe.color}
+    p Specialty 
+      br
+      &emsp; #{oneRecipe.specialty}
+    p Tested 
+      br
+      &emsp; #{oneRecipe.tested}
+  .medium-8.columns
+    .row
+      .medium-9.columns
+        h3 Base Ingredients
+        p.line #{ingredients[0]}
+        p.line #{ingredients[1]}
+        p.line #{ingredients[2]}
+        p.line #{ingredients[3]}
+        p.line #{ingredients[4]}
+        p.line #{ingredients[5]}
+        p.line #{ingredients[6]}
+        p.line #{ingredients[7]}
+        p.line #{ingredients[8]}
+        p.line #{ingredients[9]}
+      .medium-3.columns
+        h3 Amount
+        p.line #{amounts[0]}
+        p.line #{amounts[1]}
+        p.line #{amounts[2]}
+        p.line #{amounts[3]}
+        p.line #{amounts[4]}
+        p.line #{amounts[5]}
+        p.line #{amounts[6]}
+        p.line #{amounts[7]}
+        p.line #{amounts[8]}
+        p.line #{amounts[9]}
+    .row
+      .medium-9.columns
+        h3 Additional Ingredients
+        p.line #{addIngredients[0]}
+        p.line #{addIngredients[1]}
+        p.line #{addIngredients[2]}
+        p.line #{addIngredients[3]}
+        p.line #{addIngredients[4]}
+        p.line #{addIngredients[5]}
+      .medium-3.columns
+        h3 Amount
+        p.line #{addAmounts[0]}
+        p.line #{addAmounts[1]}
+        p.line #{addAmounts[2]}
+        p.line #{addAmounts[3]}
+        p.line #{addAmounts[4]}
+        p.line #{addAmounts[5]}
+    .row
+      .medium-12.columns.notes
+        h3 Notes
+        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec porta nibh. Aenean turpis metus, finibus a aliquam a, congue vitae est. Donec ornare suscipit augue, in consectetur nulla porta sit amet. Maecenas sed lacus efficitur, sodales dolor nec, feugiat eros.
 .row
-  if oneRecipe
-    table
-      tr
-        td Temperature Range
-        td #{oneRecipe.tempRange}
-      tr
-        td Cone
-        td #{oneRecipe.cone}
-      tr
-        td Type of Firing
-        td #{oneRecipe.firingType}
-      tr
-        td Surface
-        td #{oneRecipe.surface}
-      tr
-        td Opacity
-        td #{oneRecipe.opacity}
-      tr
-        td Color
-        td #{oneRecipe.color}
-      tr
-        td Specialty Glaze
-        td #{oneRecipe.specialty}
-      tr
-        td INGREDIENTS
-      if ingredients[0]
-        td #{ingredients[0]}
-      if ingredients[1]
-        td #{ingredients[1]}
-      if ingredients[2]
-        td #{ingredients[2]}
-      if ingredients[3]
-        td #{ingredients[3]}
-      if ingredients[4]
-        td #{ingredients[4]}
-      if ingredients[5]
-        td #{ingredients[5]}
-      if ingredients[6]
-        td #{ingredients[6]}
-      if ingredients[7]
-        td #{ingredients[7]}
-      if ingredients[8]
-        td #{ingredients[8]}
-      if ingredients[9]
-        td #{ingredients[9]}
-      if ingredients[10]
-        td #{ingredients[10]}
-      tr
-        td Amount
-        if amounts[0]
-          td #{amounts[0]}
-        if amounts[1]
-          td #{amounts[1]}
-        if amounts[2]
-          td #{amounts[2]}
-        if amounts[3]
-          td #{amounts[3]}
-        if amounts[4]
-          td #{amounts[4]}
-        if amounts[5]
-          td #{amounts[5]}
-        if amounts[6]
-          td #{amounts[6]}
-        if amounts[7]
-          td #{amounts[7]}
-        if amounts[8]
-          td #{amounts[8]}
-        if amounts[9]
-          td #{amounts[9]}
-        if amounts[10]
-          td #{amounts[10]}
-        tr
-          td ADD INGREDIENTS
-        if addIngredients[0]
-          td #{addIngredients[0]}
-        if addIngredients[1]
-          td #{addIngredients[1]}
-        if addIngredients[2]
-          td #{addIngredients[2]}
-        if addIngredients[3]
-          td #{addIngredients[3]}
-        if addIngredients[4]
-          td #{addIngredients[4]}
-        if addIngredients[5]
-          td #{addIngredients[5]}
-        if addIngredients[6]
-          td #{addIngredients[6]}
-        tr
-          td Add Amount
-          if addAmounts[0]
-            td #{addAmounts[0]}
-          if addAmounts[1]
-            td #{addAmounts[1]}
-          if addAmounts[2]
-            td #{addAmounts[2]}
-          if addAmounts[3]
-            td #{addAmounts[3]}
-          if addAmounts[4]
-            td #{addAmounts[4]}
-          if addAmounts[5]
-            td #{addAmounts[5]}
-          if addAmounts[6]
-            td #{addAmounts[6]}
-      tr
-        td Tested
-        td #{oneRecipe.tested}
-      tr
-        td Notes
-        td #{oneRecipe.notes}
-      tr
-        td Image
-        td #{oneRecipe.image}
+  .medium-12.columns.footer  
+    p Footer
+        
 
 
 
