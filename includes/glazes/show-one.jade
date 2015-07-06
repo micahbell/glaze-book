@@ -1,23 +1,24 @@
 .row 
   .medium-2.columns
     .image
-      img(src='#{oneRecipe.image}')
+      //- img(src='#{oneRecipe.image}')
   .medium-6.columns
     h1 #{oneRecipe.title}
   .medium-4.columns
     .row
       .medium-2.columns.circle
-        //- a(href='/glazes/' + oneRecipe._id + '/edit') Edit
+        a(href='/glazes/' + oneRecipe.dateAdded + '/edit') Edit
       .medium-2.columns.circle
-        p Delete
+        a(href='/glazes/' + oneRecipe.dateAdded + '/delete') Delete
+        //- p Delete
 .row
   .medium-4.columns.attributes
     p Temperature Range 
       br
-      &emsp; #{oneRecipe.tempRange}
+      &emsp;#{oneRecipe.tempRange}
     p Cone 
       br
-      &emsp; #{oneRecipe.cone}
+      &emsp;#{oneRecipe.cone}
     p Type of Firing
       br
       &emsp; #{oneRecipe.firingType}

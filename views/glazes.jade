@@ -2,16 +2,15 @@ extends layout
 
 block content
   .container
-    .row  
-      .medium-12.columns
-        .medium-8.columns
-          p the glazebook
-        .medium-4.columns
-          input(type='text' placeholder='Search' name='search')
-          input(type='submit' value='©')
+    .row.header 
+      .medium-8.columns
+        p the glazebook
+      .medium-4.columns
+        input(type='text' placeholder='Search' name='search')
+        input(type='submit' value='©')
     
     .row
-      .medium-1.columns.main-content
+      .medium-1.columns.main-content.primary-nav
         if currentUser
           p #{currentUser}
           form(action='/logout' method='post')
@@ -22,8 +21,11 @@ block content
         
       .medium-4.columns.main-content
         p
-        a(href='/glazes/show-all') 
-          input(type='button' value='All Recipes')
+        form(action='/glazes/show-all' method='get') 
+          input(type='submit' value='All Recipes')
+        //- p
+        //- a(href='/glazes/show-all') 
+        //-   input(type='button' value='All Recipes')
         p
         form(action='/glazes/favorites' method='post')
           input(type='submit' value='Favorites')

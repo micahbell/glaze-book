@@ -1,6 +1,7 @@
 /********** Global Styles **********/
 body {
   margin: 40px 0px;
+  color: #767373;
 }
 
 .container {
@@ -8,17 +9,35 @@ body {
   margin-bottom: 40px;
 }
 
+.header {
+  background-color: #dcd9d9;
+}
+
+input[name='search'] {
+  margin-top: 20px;
+}
+/********** Colors **********/
+/*
+red-orange: #f15e51
+yellow-orange: #f7b267
+deep green: #093a43
+dark blue: #113b5a
+light warm gray: #f5f2f2
+warm gray: #dcd9d9
+dark warm gray: #767373
+*/
 /********** Grid **********/
+
 .row {
   display: flex;
 }
 
 .columns {
   font-size: 0.9375em;
-  border: 1px solid black;
+  border: 1px solid gray;
 }
-
 /********** Links and Buttons **********/
+
 a {
   color: #00B7FF;
 }
@@ -29,41 +48,100 @@ a {
   height: 50px;
   background-color: lightblue;
 }
+/********** Forms and Inputs **********/
 
+input[type='text'] {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #dcd9d9;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="text"].focus {
+  border-bottom: solid 1px #767373;
+}
+
+input[type='text'] {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #dcd9d9;
+  transition: border 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="text"].focus {
+  border-bottom: solid 1px #767373;
+}
+/********** Login Page **********/
+
+p.errors {
+  color: red;
+}
 /********** Main Content **********/
+
 .main-content {
   height: 600px;
   overflow: scroll;
 }
 
 .attributes {
-  background-color: whitesmoke;
-  height: 100vh;
+  background-color: #f5f2f2;
+  /*height: 100vh;*/
 }
 
-/********** Login Page **********/
-p.errors {
+.attr {
   color: red;
 }
-
 /********** Show One Page **********/
 .line {
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid #dcd9d9;
 }
-/********** Show All Page **********/
-/********** Edit Page **********/
-
 
 .image {
   flex: 1;
-  background-color: whitesmoke;
-  border: 1px solid gray;
 }
 
-.footer {
-  background-color: lightgray;
+/********** Show All Page **********/
+/********** Edit Page **********/
+/********** New Page **********/
+.attributes label {
+  display: block;
+  margin-top: 2.5em;
+}
+
+input[name='title'],
+input[name='search'] {
+  width: 90%;
 }
 
 textarea {
-  width: 95%;
+  width: 100%;
+  padding: 5px;
+  outline: none;
+  border: solid 1px #dcd9d9;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+textarea:focus,
+textarea.focus {
+  border: solid 1px #767373;
+}
+
+
+
+
+
+
+
+
+
+/********** Footer **********/
+
+.footer {
+  background-color: #dcd9d9;
 }

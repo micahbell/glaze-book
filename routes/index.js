@@ -20,6 +20,7 @@ router.get('/glazes', function(req, res, next) {
 });
 
 router.get('/glazes/show-all', function(req, res, next) {
+  console.log("hellooooooo");
   if(req.cookies.currentUser) {
     var userCookie = req.cookies.currentUser;
     var emailCookie = req.cookies.userEmail;
@@ -37,14 +38,17 @@ router.get('/glazes/show-all', function(req, res, next) {
 
 // Show One ====================
 
-router.get('/glazes/:id', function(req, res, next) {
+// router.get('/glazes/:id', function(req, res, next) {
+router.get('/glazes/:dateAdded', function(req, res, next) {
   if(req.cookies.currentUser) {
     var userCookie = req.cookies.currentUser;
     var emailCookie = req.cookies.userEmail;
     userCollection.findOne({ email: emailCookie }, function(err, oneRecipe) {
-      var recipeID = req.params.id;
-      console.log('-----------------', recipeID);
+      // var recipeID = req.params.id;
+      var recipeID = req.params.dateAdded;
+      console.log('-----------------', req.params);
       var recipeArray = oneRecipe.glazeRecipes;
+      console.log('+++++++++++++++++', recipeArray);
       var recipe = database.recipeFinder(recipeID, recipeArray);
       console.log('******************', recipe);
       var ingredients = recipe.ingredients;
@@ -53,7 +57,6 @@ router.get('/glazes/:id', function(req, res, next) {
       var addAmounts = recipe.addAmounts;
       if(oneRecipe) {
         res.render('glazes', { oneRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
-        // res.render('glazes', { oneRecipe: recipe, currentUser: userCookie });
       };
     });
   } else {
@@ -63,12 +66,14 @@ router.get('/glazes/:id', function(req, res, next) {
 
 // Edit ====================
 
-router.get('/glazes/:id/edit', function(req, res, next) {
+// router.get('/glazes/:id/edit', function(req, res, next) {
+router.get('/glazes/:dateAdded/edit', function(req, res, next) {
   if(req.cookies.currentUser) {
     var userCookie = req.cookies.currentUser;
     var emailCookie = req.cookies.userEmail;
     userCollection.findOne({ email: emailCookie }, function(err, editRecipe) {
-      var recipeID = req.params.id;
+      // var recipeID = req.params.id;
+      var recipeID = req.params.dateAdded;
       var recipeArray = editRecipe.glazeRecipes;
       var recipe = database.recipeFinder(recipeID, recipeArray);
       var ingredients = recipe.ingredients;
@@ -209,10 +214,12 @@ router.post('/show-all', function(req, res, next) {
 
 // Submit Edit ====================
 
-router.post('/glazes/:id/edit', function(req, res, next) {
+// router.post('/glazes/:id/edit', function(req, res, next) {
+router.post('/glazes/:dateAdded/edit', function(req, res, next) {
   var emailCookie = req.cookies.userEmail;
   userCollection.findOne({ email: emailCookie }, function(err, recipe) {
-    var recipeID = req.params.id;
+    // var recipeID = req.params.id;
+    var recipeID = req.params.dateAdded;
     var recipeArray = recipe.glazeRecipes;
     var recipe = database.recipeFinder(recipeID, recipeArray);
     var date = recipe.dateAdded;
@@ -292,10 +299,12 @@ router.post('/glazes/:id/edit', function(req, res, next) {
 
 // Submit Delete ====================
 
-router.post('/glazes/:id/delete', function(req, res, next) {
+// router.post('/glazes/:id/delete', function(req, res, next) {
+router.post('/glazes/:dateAdded/delete', function(req, res, next) {
   var emailCookie = req.cookies.userEmail;
   userCollection.findOne({ email: emailCookie }, function(err, recipe) {
-    var recipeID = req.params.id;
+    // var recipeID = req.params.id;
+    var recipeID = req.params.dateAdded;
     var recipeArray = recipe.glazeRecipes;
     var recipe = database.recipeFinder(recipeID, recipeArray);
     var date = recipe.dateAdded;
