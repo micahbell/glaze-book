@@ -99,7 +99,7 @@ router.get('/glazes/:id', function(req, res, next) {
       var addIngredients = recipe.addIns;
       var addAmounts = recipe.addAmounts;
       if(allRecipes) {
-        res.render('glazes', { recipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
+        res.render('glazes', { oneRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
       };
     });
   } else {
