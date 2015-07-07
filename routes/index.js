@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 router.get('/glazes', function(req, res, next) {
   if(req.cookies.currentUser) {
     var userCookie = req.cookies.currentUser;
-    res.render('glazes', { currentUser: userCookie });)
+    res.render('glazes', { currentUser: userCookie });
   } else {
     res.redirect('/');
   };
@@ -27,8 +27,6 @@ router.get('/glazes/show-all', function(req, res, next) {
       if(!record) {
         res.redirect('/glazes');
       } else {
-        console.log('++++++++++++++++++', record);
-        console.log('===================', record.glazeRecipes);
         res.render('glazes', { currentUser: userCookie, recipes: record.glazeRecipes });
       };
     });
