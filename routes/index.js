@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 router.get('/glazes', function(req, res, next) {
   if(req.cookies.currentUser) {
     var userCookie = req.cookies.currentUser;
-    res.render('glazes', { currentUser: userCookie });
+    res.render('glazes', { currentUser: userCookie });)
   } else {
     res.redirect('/');
   };
@@ -37,6 +37,57 @@ router.get('/glazes/show-all', function(req, res, next) {
   };
 });
 
+// Firing Temps ====================
+
+router.get('/glazes/firing-temp', function(req, res, next) {
+  if(req.cookies.currentUser) {
+    var userCookie = req.cookies.currentUser;
+    var temps = [ 'Low Fire', 'Mid Range', 'High Fire'];
+    res.render('glazes', { firingTemp: temps, currentUser: userCookie });
+  } else {
+      res.redirect('/');
+  };
+});
+
+// Favorites ====================
+
+router.get('/glazes/favorites', function(req, res, next) {
+    if(req.cookies.currentUser) {
+      var userCookie = req.cookies.currentUser;
+      var emailCookie = req.cookies.userEmail;
+      userCollection.findOne({ email: emailCookie }, function(err, favRecipe) {
+        var recipeArray = favRecipe.glazeRecipes;
+        var favRecipe = database.favFinder(recipeArray);
+        if(!favRecipe) {
+          res.redirect('/glazes/show-all');
+        } else {
+          res.render('glazes', { currentUser: userCookie, favRecipe: favRecipe });
+        };
+    });
+  } else {
+      res.redirect('/');
+  };
+});
+
+// Recently Added ====================
+
+// router.get('/glazes/recently-added', function(req, res, next) {
+//   var emailCookie = req.cookies.userEmail;
+//   userCollection.findOne({ email: emailCookie }, function(err, recentRecipe) {
+//     // console.log(recentRecipe);
+//     var recipeArray = recentRecipe.glazeRecipes;
+//     recipeArray.sort({ dateAdded: 1 }).toArray(function(err, docs) {
+//       console.log('--------------------', docs);
+//     })
+//   });
+//   // userCollection.findOne({ email: emailCookie }).sort({dateAdded: 1}).toArray(function(err, docs) {
+//   //   console.log(docs);
+//   // });
+// });
+
+
+// Show One ====================
+
 router.get('/glazes/:id', function(req, res, next) {
   if(req.cookies.currentUser) {
     var userCookie = req.cookies.currentUser;
@@ -58,6 +109,7 @@ router.get('/glazes/:id', function(req, res, next) {
   };
 });
 
+// Edit ====================
 router.get('/glazes/:id/edit', function(req, res, next) {
   if(req.cookies.currentUser) {
     var userCookie = req.cookies.currentUser;
@@ -71,7 +123,7 @@ router.get('/glazes/:id/edit', function(req, res, next) {
       var addIngredients = recipe.addIns;
       var addAmounts = recipe.addAmounts;
       if(editRecipe) {
-        res.render('glazes', { manyRecipes: recipeArray, editRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
+        res.render('glazes', { editRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
       }
     });
   } else {
@@ -133,12 +185,11 @@ router.post('/logout', function(req, res, next) {
   res.redirect('/');
 });
 
-// Show All Page ====================
+// Show All ====================
 
 router.post('/show-all', function(req, res, next) {
   var date = Date();
   var recipeID = userCollection.id();
-  var userCookie = req.cookies.currentUser;
   var emailCookie = req.cookies.userEmail;
   userCollection.update({ email: emailCookie },
     { $push:
@@ -203,79 +254,109 @@ router.post('/show-all', function(req, res, next) {
   res.redirect('/glazes/show-all');
 });
 
-// Edit Page ====================
+// Submit Edit ====================
 
-// router.post('/glazes/:id/edit', function(req, res, next) {
-//   var dateUpdated = Date();
-//   var recipeID = userCollection.id();
-//   var emailCookie = req.cookies.userEmail;
-//   userCollection.update({ email: emailCookie },
-//     { $set:
-//       { glazeRecipes: {
-//         _id: recipeID,
-//         dateAdded: dateUpdated,
-//         title: req.body.title,
-//         favorite: req.body.favorite,
-//         tempRange: req.body.temp_range,
-//         cone: req.body.cone,
-//         firingType: req.body.firing_type,
-//         surface: req.body.surface,
-//         opacity: req.body.opacity,
-//         color: req.body.color,
-//         specialty: req.body.specialty,
-//         ingredients: [
-//           req.body.ingredient_1,
-//           req.body.ingredient_2,
-//           req.body.ingredient_3,
-//           req.body.ingredient_4,
-//           req.body.ingredient_5,
-//           req.body.ingredient_6,
-//           req.body.ingredient_7,
-//           req.body.ingredient_8,
-//           req.body.ingredient_9,
-//           req.body.ingredient_10
-//         ],
-//         amounts: [
-//           req.body.amount_1,
-//           req.body.amount_2,
-//           req.body.amount_3,
-//           req.body.amount_4,
-//           req.body.amount_5,
-//           req.body.amount_6,
-//           req.body.amount_7,
-//           req.body.amount_8,
-//           req.body.amount_9,
-//           req.body.amount_10
-//         ],
-//         addIns: [
-//           req.body.add_in_1,
-//           req.body.add_in_2,
-//           req.body.add_in_3,
-//           req.body.add_in_4,
-//           req.body.add_in_5,
-//           req.body.add_in_6
-//         ],
-//         addAmounts: [
-//           req.body.add_amount_1,
-//           req.body.add_amount_2,
-//           req.body.add_amount_3,
-//           req.body.add_amount_4,
-//           req.body.add_amount_5,
-//           req.body.add_amount_6
-//         ],
-//         tested: req.body.tested,
-//         notes: req.body.notes,
-//         image: req.body.image
-//       }
-//     }
-//   });
-//   res.redirect('/glazes/show-all');
-// });
+router.post('/glazes/:id/edit', function(req, res, next) {
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function(err, recipe) {
+    var recipeID = req.params.id;
+    var recipeArray = recipe.glazeRecipes;
+    // console.log('++++++++++++++++++++', recipeArray);
+    var recipe = database.recipeFinder(recipeID, recipeArray);
+    var date = recipe.dateAdded;
+    userCollection.update({ email: emailCookie },
+      { $pull:
+        { glazeRecipes:
+          { dateAdded: date }
+        }
+      }
+    );
+  });
 
+  var date = Date();
+  var recipeID = userCollection.id();
+  userCollection.update({ email: emailCookie },
+    { $push:
+      { glazeRecipes: {
+        _id: recipeID,
+        dateAdded: date,
+        title: req.body.title,
+        favorite: req.body.favorite,
+        tempRange: req.body.temp_range,
+        cone: req.body.cone,
+        firingType: req.body.firing_type,
+        surface: req.body.surface,
+        opacity: req.body.opacity,
+        color: req.body.color,
+        specialty: req.body.specialty,
+        ingredients: [
+          req.body.ingredient_1,
+          req.body.ingredient_2,
+          req.body.ingredient_3,
+          req.body.ingredient_4,
+          req.body.ingredient_5,
+          req.body.ingredient_6,
+          req.body.ingredient_7,
+          req.body.ingredient_8,
+          req.body.ingredient_9,
+          req.body.ingredient_10
+        ],
+        amounts: [
+          req.body.amount_1,
+          req.body.amount_2,
+          req.body.amount_3,
+          req.body.amount_4,
+          req.body.amount_5,
+          req.body.amount_6,
+          req.body.amount_7,
+          req.body.amount_8,
+          req.body.amount_9,
+          req.body.amount_10
+        ],
+        addIns: [
+          req.body.add_in_1,
+          req.body.add_in_2,
+          req.body.add_in_3,
+          req.body.add_in_4,
+          req.body.add_in_5,
+          req.body.add_in_6
+        ],
+        addAmounts: [
+          req.body.add_amount_1,
+          req.body.add_amount_2,
+          req.body.add_amount_3,
+          req.body.add_amount_4,
+          req.body.add_amount_5,
+          req.body.add_amount_6
+        ],
+        tested: req.body.tested,
+        notes: req.body.notes,
+        image: req.body.image
+      }
+    }
+  });
+  res.redirect('/glazes/show-all');
+});
 
+// Submit Delete ====================
 
-
-
+router.post('/glazes/:id/delete', function(req, res, next) {
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function(err, recipe) {
+    var recipeID = req.params.id;
+    var recipeArray = recipe.glazeRecipes;
+    var recipe = database.recipeFinder(recipeID, recipeArray);
+    var date = recipe.dateAdded;
+    userCollection.update({ email: emailCookie },
+      { $pull:
+        { glazeRecipes:
+          { dateAdded: date }
+        }
+      }
+    );
+  });
+  res.redirect('/glazes/show-all');
+});
 
 
 
