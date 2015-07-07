@@ -1,16 +1,17 @@
 .row 
   .medium-2.columns
     .image
-      //- img(src='#{oneRecipe.image}')
+      p IMG
   .medium-6.columns
     h1 #{oneRecipe.title}
   .medium-4.columns
     .row
-      .medium-2.columns.circle
-        a(href='/glazes/' + oneRecipe.dateAdded + '/edit') Edit
-      .medium-2.columns.circle
-        a(href='/glazes/' + oneRecipe.dateAdded + '/delete') Delete
-        //- p Delete
+      .medium-2.columns
+        form(action='/glazes/' + oneRecipe.dateAdded + '/edit')
+          input.circle(type='submit' value='Edit')
+      .medium-2.columns
+        form(action='/glazes/' + oneRecipe.dateAdded + '/delete' method='post')
+          input.circle(type='submit' value='Delete')
 .row
   .medium-4.columns.attributes
     p Temperature Range 

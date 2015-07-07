@@ -301,10 +301,12 @@ router.post('/glazes/:dateAdded/edit', function(req, res, next) {
 
 // router.post('/glazes/:id/delete', function(req, res, next) {
 router.post('/glazes/:dateAdded/delete', function(req, res, next) {
+  console.log('helllllooooooo????');
   var emailCookie = req.cookies.userEmail;
   userCollection.findOne({ email: emailCookie }, function(err, recipe) {
     // var recipeID = req.params.id;
     var recipeID = req.params.dateAdded;
+    console.log('==================', recipeID);
     var recipeArray = recipe.glazeRecipes;
     var recipe = database.recipeFinder(recipeID, recipeArray);
     var date = recipe.dateAdded;
