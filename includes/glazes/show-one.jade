@@ -7,10 +7,12 @@
   .medium-4.columns
     .row
       .medium-2.columns
-        form(action='/glazes/' + oneRecipe.dateAdded + '/edit')
+        //- form(action='/glazes/' + oneRecipe.dateAdded + '/edit')
+        form(action='/glazes/' + oneRecipe._id + '/edit')
           input.circle(type='submit' value='Edit')
       .medium-2.columns
-        form(action='/glazes/' + oneRecipe.dateAdded + '/delete' method='post')
+        //- form(action='/glazes/' + oneRecipe.dateAdded + '/delete' method='post')
+        form(action='/glazes/' + oneRecipe._id + '/delete' method='post')
           input.circle(type='submit' value='Delete')
 .row
   .medium-4.columns.attributes
@@ -84,7 +86,7 @@
     .row
       .medium-12.columns.notes
         h3 Notes
-        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec porta nibh. Aenean turpis metus, finibus a aliquam a, congue vitae est. Donec ornare suscipit augue, in consectetur nulla porta sit amet. Maecenas sed lacus efficitur, sodales dolor nec, feugiat eros.
+        textarea(name='notes' rows=6) #{oneRecipe.notes}
 .row
   .medium-12.columns.footer  
     p Footer

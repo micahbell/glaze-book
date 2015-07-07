@@ -15,25 +15,27 @@ block content
           p #{currentUser}
           form(action='/logout' method='post')
             input(type='submit' value='Logout')
-        a(href='/glazes/show-all') All Recipes
-        p Firing Temp
-        p Surface
+        p
+        form(action='/glazes/show-all' method='get') 
+          input(type='submit' value='All Recipes')
+        p
+        form(action='/glazes/firing-temp' method='get') 
+          input(type='submit' value='Firing Temp')
+          
         
       .medium-4.columns.main-content
         p
         form(action='/glazes/show-all' method='get') 
           input(type='submit' value='All Recipes')
-        //- p
-        //- a(href='/glazes/show-all') 
-        //-   input(type='button' value='All Recipes')
         p
-        form(action='/glazes/favorites' method='post')
+        form(action='/glazes/favorites' method='get')
           input(type='submit' value='Favorites')
         p 
         form(action='' method='post')
           input(type='submit' value='Recently Added')
         hr
-        p Dynamic Content - Surface/ Cone
+        if firingTemp
+          include ../includes/secondary-nav/firing-temps
           
       .medium-7.columns.main-content
         if recipe 
@@ -42,7 +44,7 @@ block content
           include ../includes/glazes/show-one
         else if editRecipe
           include ../includes/glazes/edit
-        else if favRecipes
+        else if favRecipe
           include ../includes/glazes/favorites
         else
           include ../includes/glazes/new

@@ -7,11 +7,11 @@
 for val in recipe
   .row
     .medium-2.columns
-      //- a(href='/glazes/' + val._id) IMG
-      a(href='/glazes/' + val.dateAdded) IMG
+      a(href='/glazes/' + val._id) IMG
+      //- a(href='/glazes/' + val.dateAdded) IMG
     .medium-9.columns
-      //- a(href='/glazes/' + val._id) #{val.title}
-      a(href='/glazes/' + val.dateAdded) #{val.title}
+      a(href='/glazes/' + val._id) #{val.title}
+      //- a(href='/glazes/' + val.dateAdded) #{val.title}
       p #{val.tempRange}&emsp;|&emsp;#{val.cone}&emsp;|&emsp;#{val.surface}
     .medium-1.columns
       p Fav

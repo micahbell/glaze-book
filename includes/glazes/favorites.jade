@@ -4,12 +4,12 @@
   .medium-2.columns
     a(href='/glazes') ADD
 
-for val in favRecipes
+for val in favRecipe
   .row
     .medium-2.columns
       a(href='/glazes/' + val._id) IMG
     .medium-9.columns
-      a(href='/glazes/' + val._id) #{val.title} Hello??
+      a(href='/glazes/' + val._id) #{val.title}
       p #{val.tempRange}&emsp;|&emsp;#{val.cone}&emsp;|&emsp;#{val.surface}
     .medium-1.columns
       p Fav
