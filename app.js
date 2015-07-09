@@ -27,6 +27,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+app.use(function(req, res, next) {
+  if(req.cookies.currentUser) {
+    next()
+  } else {
+    res.redirect('/');
+  };
+});
+
+// app.use(function(req, res, next) {
+//   if(req.cookies.currentUser) {
+//     var userCookie = req.cookies.currentUser;
+//     next(userCookie)
+//   } else {
+//     res.redirect('/');
+//   };
+// });
+//
+// app.use(function(userCookie, req, res, next) {
+//   if(userCookie) {
+//     res.render( { currentUser: userCookie } );
+//   };
+// });
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
