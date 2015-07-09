@@ -44,7 +44,7 @@ dark warm gray: #767373
 
 .columns {
   font-size: 0.9375em;
-  border: 1px solid gray;
+  /*border: 1px solid gray;*/
 }
 /********** Links and Buttons **********/
 
