@@ -65,6 +65,7 @@ router.get('/glazes/favorites', function(req, res, next) {
 
 router.get('/glazes/recently-added', function(req, res, next) {
   var emailCookie = req.cookies.userEmail;
+//   $natural: -1 ?
 //   userCollection.findOne({ email: emailCookie }, function(err, recentRecipe) {
 //     console.log('++++++++++++++++++++', recentRecipe);
 //     var recipeArray = recentRecipe.glazeRecipes;
@@ -124,15 +125,15 @@ router.post('/signup', function(req, res, next) {
     if(validate.length != 0) {
       res.render('index', { signupError: validate, username: username, email: email });
     } else {
-        userCollection.insert({
-          username: username,
-          email: email,
-          password: hash,
-          glazeRecipes: []
-        });
-        res.cookie('currentUser', username );
-        res.cookie('userEmail', email );
-        res.redirect('/glazes');
+      userCollection.insert({
+        username: username,
+        email: email,
+        password: hash,
+        glazeRecipes: []
+      });
+      res.cookie('currentUser', username );
+      res.cookie('userEmail', email );
+      res.redirect('/glazes');
     };
   });
 });
