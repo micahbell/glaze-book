@@ -134,7 +134,7 @@ router.post('/signup', function(req, res, next) {
       res.cookie('currentUser', username );
       res.cookie('userEmail', email );
       res.redirect('/glazes');
-    };
+    }
   });
 });
 
@@ -145,7 +145,7 @@ router.post('/login', function(req, res, next) {
   var password = req.body.login_password.trim();
   userCollection.findOne({ email: email }, function(err, user) {
     if(!user) {
-      res.render('index', { loginError: 'No account associated with this email, please create an account.', email: email })
+      res.render('index', { loginError: 'No account associated with this email, please create an account.', email: email });
     } else if(user) {
       var compare = bcrypt.compareSync(password, user.password);
       if(compare) {
@@ -153,9 +153,9 @@ router.post('/login', function(req, res, next) {
         res.cookie('userEmail', user.email);
         res.redirect('/glazes');
       } else {
-        res.render('index', { loginError: 'Invalid password.', email: email })
-      };
-    };
+        res.render('index', { loginError: 'Invalid password.', email: email });
+      }
+    }
   });
 });
 
@@ -235,6 +235,23 @@ router.post('/show-all', function(req, res, next) {
 });
 
 // Submit Edit ====================
+
+// router.post('/glazes/:id/edit', function (req, res, next) {
+//   var emailCookie = req.cookies.userEmail;
+//   userCollection.findOne({ email: emailCookie }, function(err, recipe) {
+//     var recipeID = req.params.id;
+//     var recipeArray = recipe.glazeRecipes;
+//     var recipe = database.recipeFinder(recipeID, recipeArray);
+//     var date = recipe.dateAdded;
+//     userCollection.update({ email: emailCookie },
+//       { $set:
+//         { glazeRecipes:
+//           { dateAdded: date }
+//         }
+//       }
+//     );
+//   });
+// });
 
 router.post('/glazes/:id/edit', function(req, res, next) {
   var emailCookie = req.cookies.userEmail;
