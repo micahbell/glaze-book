@@ -185,6 +185,7 @@ router.post('/show-all', function(req, res, next) {
         opacity: req.body.opacity,
         color: req.body.color,
         specialty: req.body.specialty,
+        testStatus: req.body.test_status,
         ingredients: [
           req.body.ingredient_1,
           req.body.ingredient_2,
@@ -285,6 +286,7 @@ router.post('/glazes/:id/edit', function(req, res, next) {
         opacity: req.body.opacity,
         color: req.body.color,
         specialty: req.body.specialty,
+        testStatus: req.body.text_status,
         ingredients: [
           req.body.ingredient_1,
           req.body.ingredient_2,

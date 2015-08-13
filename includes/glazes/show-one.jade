@@ -2,16 +2,14 @@
   .medium-2.columns
     .image
       p IMG
-  .medium-6.columns
+  .medium-7.columns
     h1 #{oneRecipe.title}
-  .medium-4.columns
+  .medium-3.columns
     .row
-      .medium-2.columns
-        //- form(action='/glazes/' + oneRecipe.dateAdded + '/edit')
+      .medium-6.columns
         form(action='/glazes/' + oneRecipe._id + '/edit')
           input.circle(type='submit' value='Edit')
-      .medium-2.columns
-        //- form(action='/glazes/' + oneRecipe.dateAdded + '/delete' method='post')
+      .medium-6.columns
         form(action='/glazes/' + oneRecipe._id + '/delete' method='post')
           input.circle(type='submit' value='Delete')
 .row

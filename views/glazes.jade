@@ -2,38 +2,33 @@ extends layout
 
 block content
   .container
-    .row.header 
-      .medium-8.columns
-        p the glazebook
-      .medium-4.columns
-        input(type='text' placeholder='Search' name='search')
-        input(type='submit' value='©')
-    
     .row
-      .medium-1.columns.main-content.primary-nav
+      .medium-1.columns.main.show-for-medium-up.primary-nav
         if currentUser
-          p #{currentUser}
-          form(action='/logout' method='post')
-            input(type='submit' value='Logout')
-        p
-        form(action='/glazes/show-all' method='get') 
-          input(type='submit' value='All Recipes')
-        p
-        form(action='/glazes/firing-temp' method='get') 
-          input(type='submit' value='Firing Temp')
-        p
-        form(action='/glazes/surface' method='get') 
-          input(type='submit' value='Surface')
-          
+          button
+            img(src='../images/user.png')
+            p.light-text #{currentUser}
+            
+        form(action='/glazes/show-all' method='get')
+          button(type='submit') 
+            img(src='../images/recipes-04.png')
+            p.light-text Recipes
+            
+        form(action='/glazes/firing-temp' method='get')
+          button(type='submit')
+            img(src='../images/cone.png')
+            p.light-text Cone
+            
+        form(action='/glazes/surface' method='get')
+          button(type='submit')
+            img(src='../images/surface-03-07.png')
+            p.light-text Surface
         
-      .medium-4.columns.main-content
-        p
+      .medium-4.columns.main.secondary-nav
         form(action='/glazes/show-all' method='get') 
           input(type='submit' value='All Recipes')
-        p
         form(action='/glazes/favorites' method='get')
           input(type='submit' value='Favorites')
-        p 
         form(action='/glazes/recently-added' method='get')
           input(type='submit' value='Recently Added')
         hr
@@ -41,19 +36,29 @@ block content
           include ../includes/secondary-nav/firing-temps
         else if surface
           include ../includes/secondary-nav/surface
-
           
-      .medium-7.columns.main-content
-        if recipes
-          include ../includes/glazes/show-all
-        else if oneRecipe
-          include ../includes/glazes/show-one
-        else if editRecipe
-          include ../includes/glazes/edit
-        else if favRecipe
-          include ../includes/glazes/favorites
-        else
-          include ../includes/glazes/new
+      .medium-7.columns.main.content
+        .row
+          .medium-12.columns
+            .medium-push-5.medium-5.columns
+              input(type='text' placeholder='Search' name='search')
+              input(type='submit' value='o')
+            .medium-2.columns
+              if currentUser
+                form(action='/logout' method='post')
+                  input(type='submit' value='Logout')
+        .row
+          .medium-12.columns
+            if recipes
+              include ../includes/glazes/show-all
+            else if oneRecipe
+              include ../includes/glazes/show-one
+            else if editRecipe
+              include ../includes/glazes/edit
+            else if favRecipe
+              include ../includes/glazes/favorites
+            else
+              include ../includes/glazes/new
 
 
 

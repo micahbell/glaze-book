@@ -1,27 +1,8 @@
-/********** Global Styles **********/
-body {
-  margin: 40px 0px;
-  color: #767373;
-}
+/***** DEV *****/
+/*.columns {
+  border: 1px solid gray;
+}*/
 
-.container {
-  margin-bottom: 3em;
-  background-color: white;
-}
-
-.header {
-  background-color: #dcd9d9;
-}
-
-.primary-nav input {
-  margin-left: -12px;
-  padding: 6px;
-  font-size: 0.75em;
-}
-
-input[name='search'] {
-  margin-top: 20px;
-}
 /********** Colors **********/
 /*
 red-orange: #f15e51
@@ -32,15 +13,58 @@ light warm gray: #f5f2f2
 warm gray: #dcd9d9
 dark warm gray: #767373
 */
-/********** Grid **********/
 
-.columns {
-  font-size: 0.9375em;
-  border: 1px solid gray;
+/********** Global Styles **********/
+.container {
+  margin-top: 20px;
 }
+
+.main {
+  height: 678px;
+  overflow: scroll;
+}
+
+body, .primary-nav, .secondary-nav, .content {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+body { background-image: url('../images/bg-10.jpg'); }
+.primary-nav { background-image: url('../images/bg-10-dark-blur.jpg'); }
+.secondary-nav { background-image: url('../images/bg-10-blur.jpg'); }
+.content { background-image: url('../images/bg-10-light-blur.jpg'); }
+
+.dropdowns {
+  background-color: lightgray;
+}
+
+.footer {
+  background-color: lightgray;
+}
+
+/********** Primary Nav **********/
+.primary-nav button {
+  width: 140%;
+  position: relative;
+  right: 14px;
+  padding: 0 20px;
+  background-color: transparent;
+  border: none;
+}
+
+.primary-nav p {
+  position: relative;
+  top: -14px;
+}
+
+.light-text {
+  color: white;
+}
+
 /********** Links and Buttons **********/
 
-a {
+/*a {
   color: #00B7FF;
 }
 
@@ -49,11 +73,12 @@ a {
   width: 50px;
   height: 50px;
   background-color: lightblue;
-}
+}*/
 /********** Forms and Inputs **********/
 
 input[type='text'] {
-  width: 100%;
+  background: transparent;
+  width: 90%;
   padding: 5px;
   border: none;
   outline: none;
@@ -61,44 +86,40 @@ input[type='text'] {
   transition: border 0.3s;
 }
 
-input[type="text"]:focus,
+/*input[type="text"]:focus,
 input[type="text"].focus {
   border-bottom: solid 1px #767373;
-}
+}*/
 
 /********** Login Page **********/
 
-p.errors {
+/*p.errors {
   color: #f15e51;
-}
+}*/
 /********** Main Content **********/
 
-.main-content {
-  height: 600px;
-  overflow: scroll;
-}
 
-.attributes {
+/*.attributes {
   background-color: #f5f2f2;
   height: 100vh;
 }
 
 .attr {
   color: #f15e51;
-}
+}*/
 /********** Show One Page **********/
-.line {
+/*.line {
   border-bottom: 1px solid #dcd9d9;
 }
 
 .image {
   flex: 1;
-}
+}*/
 
 /********** Show All Page **********/
 /********** Edit Page **********/
 /********** New Page **********/
-.attributes label {
+/*.attributes label {
   display: block;
   margin-top: 2.5em;
 }
@@ -119,11 +140,11 @@ textarea {
 textarea:focus,
 textarea.focus {
   border: solid 1px #767373;
-}
+}*/
 
 
 /********** Footer **********/
 
-.footer {
+/*.footer {
   background-color: #dcd9d9;
-}
+}*/
