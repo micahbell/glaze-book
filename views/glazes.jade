@@ -5,32 +5,35 @@ block content
     .row
       .medium-1.columns.main.show-for-medium-up.primary-nav
         if currentUser
-          button
+          button#user
             img(src='../images/user.png')
-            p.light-text #{currentUser}
+            p.light-text.font-small #{currentUser}
             
         form(action='/glazes/show-all' method='get')
           button(type='submit') 
             img(src='../images/recipes-04.png')
-            p.light-text Recipes
+            p.light-text.font-small Recipes
             
         form(action='/glazes/firing-temp' method='get')
           button(type='submit')
             img(src='../images/cone.png')
-            p.light-text Cone
+            p.light-text.font-small Cone
             
         form(action='/glazes/surface' method='get')
           button(type='submit')
             img(src='../images/surface-03-07.png')
-            p.light-text Surface
+            p.light-text.font-small Surface
         
       .medium-4.columns.main.secondary-nav
-        form(action='/glazes/show-all' method='get') 
-          input(type='submit' value='All Recipes')
+        form(action='/glazes/show-all' method='get')
+          button(type='submit') 
+            span All Recipes
         form(action='/glazes/favorites' method='get')
-          input(type='submit' value='Favorites')
+          button(type='submit')
+            span Favorites
         form(action='/glazes/recently-added' method='get')
-          input(type='submit' value='Recently Added')
+          button(type='submit')
+            span Recently Added
         hr
         if firingTemp
           include ../includes/secondary-nav/firing-temps

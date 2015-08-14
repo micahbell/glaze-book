@@ -3,16 +3,15 @@
     h1 Add a Glaze Recipe
 
 form(action='/show-all' method='post')
-  .row
-    .medium-8.columns
+  .row.new-title
+    .medium-10.columns
       label(for='title') Title
       input(type='text' id='title' name='title' required)
     .medium-2.columns
       label(for='favorite') Favorite 
       input(type='checkbox' id='favorite' name='favorite')
-    .medium-2.columns
-      label(for='tested') Tested 
-      input(type='checkbox' id='tested' name='tested')
+      i.fa.fa-heart-o
+      i.fa.fa-heart
   
   .row.dropdowns
     .medium-6.columns
