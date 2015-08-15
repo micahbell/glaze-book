@@ -121,10 +121,21 @@ p.errors {
   right: 15px;
   width: 109%;
   font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 1.675rem;
   text-align: left;
-  color: rgba(0, 0, 0, 0.75);
+  color: rgba(0, 0, 0, 0.7);
   background-color: transparent;
+}
+
+.secondary-nav button#top {
+  margin-top: 14px;
+}
+
+.secondary-nav button#bottom {
+  margin-bottom: 7px;
+}
+
+.secondary-nav button h3 {
+  margin: 0.25em 0.5em;
 }
 
 .secondary-nav button:hover,

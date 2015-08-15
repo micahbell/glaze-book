@@ -26,14 +26,14 @@ block content
         
       .medium-4.columns.main.secondary-nav
         form(action='/glazes/show-all' method='get')
-          button(type='submit') 
-            span All Recipes
+          button#top(type='submit') 
+            h3 All Recipes
         form(action='/glazes/favorites' method='get')
           button(type='submit')
-            span Favorites
+            h3 Favorites
         form(action='/glazes/recently-added' method='get')
-          button(type='submit')
-            span Recently Added
+          button#bottom(type='submit')
+            h3 Recently Added
         hr
         if firingTemp
           include ../includes/secondary-nav/firing-temps
