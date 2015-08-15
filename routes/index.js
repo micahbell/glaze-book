@@ -33,16 +33,14 @@ router.get('/glazes/show-all', function(req, res, next) {
 
 router.get('/glazes/firing-temp', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
-  var temps = [ 'Low Fire', 'Mid Range', 'High Fire'];
-  res.render('glazes', { firingTemp: temps, currentUser: userCookie });
+  res.render('glazes', { currentUser: userCookie, firingTemp: ['Low Fire', 'Mid Range', 'High Fire'] });
 });
 
 // Surface ====================
 
 router.get('/glazes/surface', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
-  var surfaces = [ 'Shiny or Glossy', 'Semi-gloss', 'Semi-matte or Satin', 'Matte', 'Dry Matte'];
-  res.render('glazes', { surface: surfaces, currentUser: userCookie });
+  res.render('glazes', { currentUser: userCookie, surface: ['Shiny or Glossy', 'Semi-gloss', 'Semi-matte or Satin', 'Matte', 'Dry Matte'] });
 });
 
 // Favorites ====================

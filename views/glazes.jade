@@ -8,17 +8,14 @@ block content
           button#user
             img(src='../images/user.png')
             p.light-text.font-small #{currentUser}
-            
         form(action='/glazes/show-all' method='get')
           button(type='submit') 
             img(src='../images/recipes-04.png')
             p.light-text.font-small Recipes
-            
         form(action='/glazes/firing-temp' method='get')
           button(type='submit')
             img(src='../images/cone.png')
             p.light-text.font-small Cone
-            
         form(action='/glazes/surface' method='get')
           button(type='submit')
             img(src='../images/surface-03-07.png')
@@ -29,16 +26,16 @@ block content
           button#top(type='submit') 
             h3 All Recipes
         form(action='/glazes/favorites' method='get')
-          button(type='submit')
+          button#middle(type='submit')
             h3 Favorites
         form(action='/glazes/recently-added' method='get')
           button#bottom(type='submit')
             h3 Recently Added
         hr
         if firingTemp
-          include ../includes/secondary-nav/firing-temps
+          include includes/secondary-nav/firing-temps
         else if surface
-          include ../includes/secondary-nav/surface
+          include includes/secondary-nav/surface
           
       .medium-7.columns.main.content
         .row
@@ -53,20 +50,15 @@ block content
         .row
           .medium-12.columns
             if recipes
-              include ../includes/glazes/show-all
+              include includes/glazes/show-all
             else if oneRecipe
-              include ../includes/glazes/show-one
+              include includes/glazes/show-one
             else if editRecipe
-              include ../includes/glazes/edit
+              include includes/glazes/edit
             else if favRecipe
-              include ../includes/glazes/favorites
+              include includes/glazes/favorites
             else
-              include ../includes/glazes/new
-
-
-
-
-
+              include includes/glazes/new
 
 
 

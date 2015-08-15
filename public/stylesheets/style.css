@@ -193,23 +193,6 @@ input[type="text"].focus {
   border-bottom: 1px solid #dcd9d9;
 }
 
-.image {
-  flex: 1;
-}*/
-
-/********** Show All Page **********/
-/********** Edit Page **********/
-/********** New Page **********/
-/*.attributes label {
-  display: block;
-  margin-top: 2.5em;
-}
-
-input[name='title'],
-input[name='search'] {
-  width: 90%;
-}
-
 textarea {
   width: 100%;
   padding: 5px;
