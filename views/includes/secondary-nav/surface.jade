@@ -1,8 +1,10 @@
 .row
-  h3 Surfaces
+  .medium-12.columns
+    h3.category-header Surfaces
 
 for val in surface
   .row
-    form('action'='' method='')
-      input(type='submit' value=val)
-    p
+    .medium-12.columns
+      form(method='get' action='/glazes/surface/' + val.surface)
+        button(type='submit')
+          h4= val.title

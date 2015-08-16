@@ -16,7 +16,6 @@ router.get('/glazes', function(req, res, next) {
 });
 
 // All Recipes ====================
-
 router.get('/glazes/show-all', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
   var emailCookie = req.cookies.userEmail;
@@ -30,28 +29,113 @@ router.get('/glazes/show-all', function(req, res, next) {
 });
 
 // Firing Temps ====================
-
 router.get('/glazes/firing-temp', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
-  res.render('glazes', { currentUser: userCookie, firingTemp: ['Low Fire', 'Mid Range', 'High Fire'] });
+  res.render('glazes', { currentUser: userCookie, firingTemp: [
+    { range: 'low', title: 'Low Fire' },
+    { range: 'mid', title: 'Mid Range' },
+    { range: 'high', title: 'High Fire' }]
+  });
+});
+
+// Low Range ====================
+router.get('/glazes/firing-temp/low', function(req, res, next) {
+  var userCookie = req.cookies.currentUser;
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function (err, lowRangeRecipes) {
+    var recipeArray = lowRangeRecipes.glazeRecipes;
+    var lowRecipe = database.lowRangeFinder(recipeArray);
+    if(lowRecipe.length === 0) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', { currentUser: userCookie, lowRecipe: lowRecipe, firingTemp: [
+        { range: 'low', title: 'Low Fire' },
+        { range: 'mid', title: 'Mid Range' },
+        { range: 'high', title: 'High Fire' }]
+      });
+    };
+  });
+});
+
+// Mid Range ====================
+router.get('/glazes/firing-temp/mid', function(req, res, next) {
+  var userCookie = req.cookies.currentUser;
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function (err, midRangeRecipes) {
+    var recipeArray = midRangeRecipes.glazeRecipes;
+    var midRecipe = database.midRangeFinder(recipeArray);
+    if(midRecipe.length === 0) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', { currentUser: userCookie, midRecipe: midRecipe, firingTemp: [
+        { range: 'low', title: 'Low Fire' },
+        { range: 'mid', title: 'Mid Range' },
+        { range: 'high', title: 'High Fire' }]
+      });
+    };
+  });
+});
+
+// High Range ====================
+router.get('/glazes/firing-temp/high', function(req, res, next) {
+  var userCookie = req.cookies.currentUser;
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function (err, highRangeRecipes) {
+    var recipeArray = highRangeRecipes.glazeRecipes;
+    var highRecipe = database.highRangeFinder(recipeArray);
+    if(highRecipe.length === 0) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', { currentUser: userCookie, highRecipe: highRecipe, firingTemp: [
+        { range: 'low', title: 'Low Fire' },
+        { range: 'mid', title: 'Mid Range' },
+        { range: 'high', title: 'High Fire' }]
+      });
+    };
+  });
 });
 
 // Surface ====================
-
 router.get('/glazes/surface', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
-  res.render('glazes', { currentUser: userCookie, surface: ['Shiny or Glossy', 'Semi-gloss', 'Semi-matte or Satin', 'Matte', 'Dry Matte'] });
+  res.render('glazes', { currentUser: userCookie, surface: [
+    { surface: 'shiny', title: 'Shiny or Glossy' },
+    { surface: 'semi', title: 'Semi-gloss' },
+    { surface: 'satin', title: 'Semi-matte or Satin' },
+    { surface: 'matte', title: 'Matte' },
+    { surface: 'dry', title: 'Dry Matte' }]
+  });
+});
+
+// Surface - Shiny ====================
+router.get('/glazes/surface/shiny', function(req, res, next) {
+  var userCookie = req.cookies.currentUser;
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function(err, shinyRecipes) {
+    var recipeArray = shinyRecipes.glazeRecipes;
+    var shinyRecipe = database.shinyFinder(recipeArray);
+    if(shinyRecipe.length === 0) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', { currentUser: userCookie, shinyRecipe: shinyRecipe, surface: [
+        { surface: 'shiny', title: 'Shiny or Glossy' },
+        { surface: 'semi', title: 'Semi-gloss' },
+        { surface: 'satin', title: 'Semi-matte or Satin' },
+        { surface: 'matte', title: 'Matte' },
+        { surface: 'dry', title: 'Dry Matte' }]
+      });
+    };
+  });
 });
 
 // Favorites ====================
-
 router.get('/glazes/favorites', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
   var emailCookie = req.cookies.userEmail;
   userCollection.findOne({ email: emailCookie }, function(err, favRecipe) {
     var recipeArray = favRecipe.glazeRecipes;
     var favRecipe = database.favFinder(recipeArray);
-    if(!favRecipe) {
+    if(favRecipe.length === 0) {
       res.redirect('/glazes/show-all');
     } else {
     res.render('glazes', { currentUser: userCookie, favRecipe: favRecipe });
@@ -60,7 +144,6 @@ router.get('/glazes/favorites', function(req, res, next) {
 });
 
 // Recently Added ====================
-
 router.get('/glazes/recently-added', function(req, res, next) {
   var emailCookie = req.cookies.userEmail;
 //   $natural: -1 ?
@@ -72,7 +155,6 @@ router.get('/glazes/recently-added', function(req, res, next) {
 });
 
 // Show One ====================
-
 router.get('/glazes/:id', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
   var emailCookie = req.cookies.userEmail;
@@ -85,7 +167,14 @@ router.get('/glazes/:id', function(req, res, next) {
     var addIngredients = recipe.addIns;
     var addAmounts = recipe.addAmounts;
     if(allRecipes) {
-      res.render('glazes', { oneRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
+      res.render('glazes', {
+        oneRecipe: recipe,
+        ingredients: ingredients,
+        amounts: amounts,
+        addIngredients: addIngredients,
+        addAmounts: addAmounts,
+        currentUser: userCookie
+      });
     };
   });
 });
@@ -104,13 +193,19 @@ router.get('/glazes/:id/edit', function(req, res, next) {
     var addIngredients = recipe.addIns;
     var addAmounts = recipe.addAmounts;
     if(editRecipe) {
-      res.render('glazes', { editRecipe: recipe, ingredients: ingredients, amounts: amounts, addIngredients: addIngredients, addAmounts: addAmounts, currentUser: userCookie });
+      res.render('glazes', {
+        editRecipe: recipe,
+        ingredients: ingredients,
+        amounts: amounts,
+        addIngredients: addIngredients,
+        addAmounts: addAmounts,
+        currentUser: userCookie
+      });
     };
   });
 });
 
 // Signup ====================
-
 router.post('/signup', function(req, res, next) {
   var username = req.body.username.trim();
   var email = req.body.signup_email.toLowerCase().trim();
@@ -137,7 +232,6 @@ router.post('/signup', function(req, res, next) {
 });
 
 // Login and Logout ====================
-
 router.post('/login', function(req, res, next) {
   var email = req.body.login_email.toLowerCase().trim();
   var password = req.body.login_password.trim();
@@ -164,7 +258,6 @@ router.post('/logout', function(req, res, next) {
 });
 
 // Show All ====================
-
 router.post('/show-all', function(req, res, next) {
   var date = Date();
   var recipeID = userCollection.id();
@@ -335,7 +428,6 @@ router.post('/glazes/:id/edit', function(req, res, next) {
 });
 
 // Submit Delete ====================
-
 router.post('/glazes/:id/delete', function(req, res, next) {
   var emailCookie = req.cookies.userEmail;
   userCollection.findOne({ email: emailCookie }, function(err, recipe) {

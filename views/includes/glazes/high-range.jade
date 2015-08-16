@@ -1,0 +1,15 @@
+.row
+  .medium-10.columns
+    h1 High Range Recipes
+  .medium-2.columns
+    a(href='/glazes') ADD
+
+for val in highRecipe
+  .row
+    .medium-2.columns
+      a(href='/glazes/' + val._id) IMG
+    .medium-9.columns
+      a(href='/glazes/' + val._id) #{val.title}
+      p #{val.tempRange} | #{val.cone} | #{val.surface}
+    .medium-1.columns
+      p Fav

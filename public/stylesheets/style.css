@@ -126,22 +126,33 @@ p.errors {
   background-color: transparent;
 }
 
+.secondary-nav button h3 {
+  margin: 0.25em 0.5em;
+}
+
 .secondary-nav button#top {
   margin-top: 14px;
+}
+
+.secondary-nav h3.category-header {
+  margin-top: 14px;
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .secondary-nav button#bottom {
   margin-bottom: 7px;
 }
 
-.secondary-nav button h3 {
-  margin: 0.25em 0.5em;
-}
-
 .secondary-nav button:hover,
 .secondary-nav button:active {
   background-color: #f15e51;
   color: rgba(255, 255, 255, 0.7);
+}
+
+.secondary-nav button h4 {
+  position: relative;
+  left: 8px;
+  margin: 0.25em 0.5em;
 }
 
 /********** Add New Content **********/

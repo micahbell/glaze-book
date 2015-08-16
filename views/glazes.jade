@@ -10,7 +10,7 @@ block content
             p.light-text.font-small #{currentUser}
         form(action='/glazes/show-all' method='get')
           button(type='submit') 
-            img(src='../images/recipes-04.png')
+            img(src='../images/recipes.png')
             p.light-text.font-small Recipes
         form(action='/glazes/firing-temp' method='get')
           button(type='submit')
@@ -18,7 +18,7 @@ block content
             p.light-text.font-small Cone
         form(action='/glazes/surface' method='get')
           button(type='submit')
-            img(src='../images/surface-03-07.png')
+            img(src='../images/surface.png')
             p.light-text.font-small Surface
         
       .medium-4.columns.main.secondary-nav
@@ -57,6 +57,12 @@ block content
               include includes/glazes/edit
             else if favRecipe
               include includes/glazes/favorites
+            else if lowRecipe
+              include includes/glazes/low-range
+            else if midRecipe
+              include includes/glazes/mid-range
+            else if highRecipe
+              include includes/glazes/high-range
             else
               include includes/glazes/new
 
