@@ -38,15 +38,15 @@ block content
           include includes/secondary-nav/surface
           
       .medium-7.columns.main.content
-        .row
-          .medium-12.columns
-            .medium-push-5.medium-5.columns
-              input(type='text' placeholder='Search' name='search')
-              input(type='submit' value='o')
-            .medium-2.columns
-              if currentUser
-                form(action='/logout' method='post')
-                  input(type='submit' value='Logout')
+        .row.header
+          .medium-push-7.medium-3.columns.search-bar
+            input(type='text' placeholder='Search' name='search')
+            button(type='submit') 
+              i.fa.fa-search 
+          .medium-2.columns.logout
+            if currentUser
+              form(action='/logout' method='post')
+                button(type='submit') Logout
         .row
           .medium-12.columns
             if recipes

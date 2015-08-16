@@ -1,5 +1,5 @@
 .row
-  .medium-12.columns
+  .medium-12.columns.content-h1
     h1 Add a Glaze Recipe
 
 form.add-new(action='/show-all' method='post')
@@ -8,8 +8,9 @@ form.add-new(action='/show-all' method='post')
       label(for='title') 
         h2 Title
       input(type='text' id='title' name='title' required)
-    .medium-2.columns
+    .medium-2.columns.fav
       label(for='favorite') 
+        h2 Fav
         input(type='checkbox' id='favorite' name='favorite')
         i.fa.fa-heart-o
         i.fa.fa-heart
@@ -112,8 +113,8 @@ form.add-new(action='/show-all' method='post')
               option Purple
      
   .row
-    .medium-7.columns
-      .row
+    .medium-8.columns
+      .row.ingredients
         .medium-9.columns
           label(for='ingredients') 
             h3 Base Ingredients
@@ -140,7 +141,14 @@ form.add-new(action='/show-all' method='post')
           input(type='text' id='amount' name='amount_8')
           input(type='text' id='amount' name='amount_9')
           input(type='text' id='amount' name='amount_10')
-      .row
+    .medium-4.columns  
+      label(for='notes') 
+        h3 Notes
+      textarea(rows=6 id='notes' name='notes')
+          
+  .row
+    .medium-8.columns
+      .row.ingredients
         .medium-9.columns
           label(for='add-ingredients') 
             h3 Additional Ingredients
@@ -160,43 +168,34 @@ form.add-new(action='/show-all' method='post')
           input(type='text' id='add-amounts'  name='add_amount_5')
           input(type='text' id='add-amounts'  name='add_amount_6')
           
-    .medium-5.columns
-      .row
-        .medium-12.columns
-          label(for='notes') 
-            h3 Notes
-          textarea(rows=6 id='notes' name='notes')
-      
-      .row
-        .medium-12.columns
-          h3 Additional Information
-        .medium-12.columns
-          select(id='specialty' name='specialty')
-            option(disabled selected) Specialty Glaze
-            option Crystalline
-            option Metallic
-            option Luster
-            option Texture
-            option Rivulet
-            option Slip
-            option Stain
-            option Engobe
+    .medium-4.columns
+      .add-info
+        h4 Additional Information
+        select(id='specialty' name='specialty')
+          option(disabled selected) Specialty Glaze
+          option Crystalline
+          option Metallic
+          option Luster
+          option Texture
+          option Rivulet
+          option Slip
+          option Stain
+          option Engobe
         
-        .medium-12.columns
-          select(id='test-status' name='test_status')
-            option(disabled selected) Test Status
-            option Tested
-            option Untested
-            option In Progress
-            
-        .medium-12.columns
-          label(for='image') 
-            h3 Upload Image
-          input(type='file' id='image' placeholder='Select File' name='image')
+        select(id='test-status' name='test_status')
+          option(disabled selected) Test Status
+          option Tested
+          option Untested
+          option In Progress
+          
+        label(for='image') 
+          h4 Upload Image
+        input(type='file' id='image' name='image')
   
-  .row
+  .row.submit-button
     .medium-12.columns
-      input(type='submit' value="Add New Recipe")
+      button(type='submit')   
+        h4 Add New Recipe
       
 .row
   .medium-12.columns.footer  
