@@ -28,6 +28,7 @@ dark warm gray: #767373
 .main {
   height: 676px;
   overflow: scroll;
+  color: #555;
 }
 
 body, .primary-nav, .secondary-nav, .content {
@@ -41,7 +42,7 @@ body { background-image: url('../images/bg-10.jpg'); }
 .secondary-nav { background-image: url('../images/bg-10-blur.jpg'); }
 .content { background-image: url('../images/bg-10-light-blur.jpg'); }
 
-button, select, input[type='text'] {
+button, select, textarea, input[type='text'] {
   border: none;
   outline: none;
 }
@@ -54,17 +55,19 @@ select {
   padding: 6px 12px;
   font-family: 'Open Sans', sans-serif;
   border-radius: 4px;
+  background-color: white;
   box-shadow: 2px 2px 3px #ddd; /* offset-x | y | blur-radius | spread-radius | color */
 }
 
-select:focus {
+select:focus,
+textarea:focus {
     box-shadow: 0 0 3px #f15e51;
 }
 
 input[type='text'] {
   width: 100%;
   background: transparent;
-  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #555;
   transition: border 0.4s;
 }
 
@@ -78,7 +81,9 @@ input[type="text"]:focus {
 :-ms-input-placeholder { color: #ccc; }
 
 .footer {
-  background-color: lightgray;
+  background-color: #555;
+  height: 42px;
+  width: 100%;
 }
 
 /********** Type **********/
@@ -155,7 +160,7 @@ hr {
   width: 109%;
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: left;
-  color: rgba(0, 0, 0, 0.7);
+  color: #555;
   background-color: transparent;
 }
 
@@ -174,7 +179,7 @@ hr {
 .secondary-nav h3.category-header {
   margin-top: 14px;
   margin-bottom: 7px;
-  color: rgba(0, 0, 0, 0.7);
+  color: #555;
 }
 
 .secondary-nav button:hover,
@@ -200,22 +205,22 @@ hr {
 }
 
 .content .search-bar {
-  border: 2px solid rgba(0, 0, 0, 0.5);
+  border: 2px solid #999;
   border-radius: 4px;
   padding: 3.5px 7px;
 }
 
-.search-bar input[name='search'] {
+.content .search-bar input[name='search'] {
   width: 83%;
   border-bottom: none;
 }
 
-.search-bar button[type='submit'] {
+.content .search-bar button[type='submit'] {
   background-color: transparent;
   position: relative;
   right: -10px;
   padding-left: 0px;
-  color: rgba(0, 0, 0, 0.5);
+  color: #999;
 }
 
 .content .logout button {
