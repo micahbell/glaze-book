@@ -128,6 +128,90 @@ router.get('/glazes/surface/shiny', function(req, res, next) {
   });
 });
 
+// Surface - Semi-Gloss ====================
+router.get('/glazes/surface/semi', function(req, res, next) {
+  var userCookie = req.cookies.currentUser;
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function(err, semiRecipes) {
+    var recipeArray = semiRecipes.glazeRecipes;
+    var semiRecipe = database.semiFinder(recipeArray);
+    if(semiRecipe.length === 0) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', { currentUser: userCookie, semiRecipe: semiRecipe, surface: [
+        { surface: 'shiny', title: 'Shiny or Glossy' },
+        { surface: 'semi', title: 'Semi-gloss' },
+        { surface: 'satin', title: 'Semi-matte or Satin' },
+        { surface: 'matte', title: 'Matte' },
+        { surface: 'dry', title: 'Dry Matte' }]
+      });
+    };
+  });
+});
+
+// Surface - Satin ====================
+router.get('/glazes/surface/satin', function(req, res, next) {
+  var userCookie = req.cookies.currentUser;
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function(err, satinRecipes) {
+    var recipeArray = satinRecipes.glazeRecipes;
+    var satinRecipe = database.satinFinder(recipeArray);
+    if(satinRecipe.length === 0) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', { currentUser: userCookie, satinRecipe: satinRecipe, surface: [
+        { surface: 'shiny', title: 'Shiny or Glossy' },
+        { surface: 'semi', title: 'Semi-gloss' },
+        { surface: 'satin', title: 'Semi-matte or Satin' },
+        { surface: 'matte', title: 'Matte' },
+        { surface: 'dry', title: 'Dry Matte' }]
+      });
+    };
+  });
+});
+
+// Surface - Matte ====================
+router.get('/glazes/surface/matte', function(req, res, next) {
+  var userCookie = req.cookies.currentUser;
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function(err, matteRecipes) {
+    var recipeArray = matteRecipes.glazeRecipes;
+    var matteRecipe = database.matteFinder(recipeArray);
+    if(matteRecipe.length === 0) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', { currentUser: userCookie, matteRecipe: matteRecipe, surface: [
+        { surface: 'shiny', title: 'Shiny or Glossy' },
+        { surface: 'semi', title: 'Semi-gloss' },
+        { surface: 'satin', title: 'Semi-matte or Satin' },
+        { surface: 'matte', title: 'Matte' },
+        { surface: 'dry', title: 'Dry Matte' }]
+      });
+    };
+  });
+});
+
+// Surface - Dry ====================
+router.get('/glazes/surface/dry', function(req, res, next) {
+  var userCookie = req.cookies.currentUser;
+  var emailCookie = req.cookies.userEmail;
+  userCollection.findOne({ email: emailCookie }, function(err, dryRecipes) {
+    var recipeArray = dryRecipes.glazeRecipes;
+    var dryRecipe = database.dryFinder(recipeArray);
+    if(dryRecipe.length === 0) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', { currentUser: userCookie, dryRecipe: dryRecipe, surface: [
+        { surface: 'shiny', title: 'Shiny or Glossy' },
+        { surface: 'semi', title: 'Semi-gloss' },
+        { surface: 'satin', title: 'Semi-matte or Satin' },
+        { surface: 'matte', title: 'Matte' },
+        { surface: 'dry', title: 'Dry Matte' }]
+      });
+    };
+  });
+});
+
 // Favorites ====================
 router.get('/glazes/favorites', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
@@ -180,7 +264,6 @@ router.get('/glazes/:id', function(req, res, next) {
 });
 
 // Edit ====================
-
 router.get('/glazes/:id/edit', function(req, res, next) {
   var userCookie = req.cookies.currentUser;
   var emailCookie = req.cookies.userEmail;
