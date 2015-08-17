@@ -83,7 +83,7 @@ input[type="text"]:focus {
 :-ms-input-placeholder { color: #ccc; }
 
 .footer {
-  background-color: #555;
+  background-image: url('../images/bg-10-dark-blur.jpg');
   height: 42px;
   width: 100%;
 }
