@@ -43,7 +43,7 @@ body { background-image: url('../images/bg-10.jpg'); }
 .secondary-nav { background-image: url('../images/bg-10-blur.jpg'); }
 .content { background-image: url('../images/bg-10-light-blur.jpg'); }
 
-button, select, textarea, .link-button, input[type='text'] {
+button, select, textarea, .add-button, input[type='text'] {
   border-radius: 4px;
   border: none;
   outline: none;
@@ -207,6 +207,7 @@ hr {
 }
 
 .content .search-bar {
+  border-radius: 4px;
   border: 2px solid #999;
   padding: 3.5px 7px;
 }
@@ -230,28 +231,32 @@ hr {
   box-shadow: 2px 2px 3px #bbb;
 }
 
+.content .logout button:active {
+  box-shadow: 0px 0px 1px #bbb;
+}
+
 .content-h1 {
   margin-top: 14px;
 }
 
 /********** Add New Content **********/
-.new-title input {
+.new-title input, .edit-title input {
   position: relative;
   bottom: 6px;
   width: 85%;
   margin-left: 14px;
 }
 
-.new-title .fav {
+.new-title .fav, .edit-title .fav {
   padding: 0px;
 }
 
-.add-new h2 {
+.add-new h2, .edit h2 {
   display: inline;
   color: #f15e51;
 }
 
-.add-new h3 {
+.add-new h3, .edit h3 {
   margin-top: 7px;
   color: #f15e51;
 }
@@ -353,16 +358,20 @@ textarea#notes {
   box-shadow: 2px 2px 3px #bbb;
 }
 
+.submit-button button:active {
+  box-shadow: 0px 0px 1px #bbb;
+}
+
 .submit-button h4 {
   margin: 7px 0px;
 }
 
 /********** Show All Content **********/
-.show-all h1 {
-  margin-top: 36px;
+.show-h1 h1 {
+  margin-top: 50px;
 }
 
-.show-all .link-button {
+.add-button {
   position: relative;
   top: 48px;
   left: 27px;
@@ -374,10 +383,15 @@ textarea#notes {
   box-shadow: 2px 2px 3px #bbb;
 }
 
+.add-button:active {
+  box-shadow: 0px 0px 1px #bbb;
+}
+
 .recipe:nth-child(odd),
 .recipe:nth-child(even) {
   width: 100%;
   margin: 0 auto;
+  border-radius: 4px;
 }
 
 .recipe:nth-child(even) {
@@ -391,14 +405,14 @@ textarea#notes {
 
 .recipe p {
   position: relative;
-  top: -10.5px;
+  top: -7px;
   margin-bottom: 14px;
 }
 
 .recipe .fav {
   position: relative;
   right: 23px;
-  top: 33px;
+  top: 34px;
   font-size: 1.333em;
 }
 

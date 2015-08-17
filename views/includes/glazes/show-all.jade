@@ -1,8 +1,8 @@
 .row.show-all
-  .medium-10.columns.content-h1
+  .medium-10.columns.show-h1
     h1 All Recipes
   .medium-2.columns
-    a.link-button(href='/glazes') +
+    a.add-button(href='/glazes') +
 
 for val in recipes
   .row.recipe
@@ -11,7 +11,7 @@ for val in recipes
     .medium-9.columns
       a(href='/glazes/' + val._id) 
         h3 #{val.title}
-      p #{val.tempRange} | #{val.cone} | #{val.surface}
+        p #{val.tempRange} | #{val.cone} | #{val.surface}
     .medium-1.columns.fav
       if val.favorite
         i.fa.fa-heart
