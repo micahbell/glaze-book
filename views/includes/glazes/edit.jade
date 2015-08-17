@@ -1,6 +1,6 @@
 .row
   .medium-12.columns.content-h1
-    h1 Edit a Recipe
+    h1 Edit #{editRecipe.title}
 
 
 form.edit(action='/glazes/' + editRecipe._id + '/edit' method='post')
@@ -15,8 +15,10 @@ form.edit(action='/glazes/' + editRecipe._id + '/edit' method='post')
         if editRecipe.favorite 
           input(type='checkbox' id='favorite' name='favorite' checked)
           i.fa.fa-heart
+          i.fa.fa-heart-o
         else 
           input(type='checkbox' id='favorite' name='favorite')
+          i.fa.fa-heart
           i.fa.fa-heart-o
         
   .row
