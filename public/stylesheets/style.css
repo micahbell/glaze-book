@@ -1,8 +1,3 @@
-/***** DEV *****/
-/*.columns {
-  border: 1px solid gray;
-}*/
-
 /********** Colors **********/
 /*
 red-orange: #f15e51 | 241 94 81
@@ -19,6 +14,11 @@ dark warm gray: #767373
 * {
   box-sizing: border-box;
   font-size: 1em;
+}
+
+a:visited,
+a:link {
+  color: #555;
 }
 
 .container {
@@ -42,7 +42,8 @@ body { background-image: url('../images/bg-10.jpg'); }
 .secondary-nav { background-image: url('../images/bg-10-blur.jpg'); }
 .content { background-image: url('../images/bg-10-light-blur.jpg'); }
 
-button, select, textarea, input[type='text'] {
+button, select, textarea, .link-button, input[type='text'] {
+  border-radius: 4px;
   border: none;
   outline: none;
 }
@@ -54,7 +55,6 @@ select {
   margin-bottom: 12px;
   padding: 6px 12px;
   font-family: 'Open Sans', sans-serif;
-  border-radius: 4px;
   background-color: white;
   box-shadow: 2px 2px 3px #ddd; /* offset-x | y | blur-radius | spread-radius | color */
 }
@@ -206,7 +206,6 @@ hr {
 
 .content .search-bar {
   border: 2px solid #999;
-  border-radius: 4px;
   padding: 3.5px 7px;
 }
 
@@ -224,7 +223,6 @@ hr {
 }
 
 .content .logout button {
-  border-radius: 4px;
   padding: 7px 14px;
   background-color: #b6dad5;
   box-shadow: 2px 2px 3px #bbb;
@@ -295,6 +293,21 @@ i.fa.fa-heart {
   border-top-right-radius: 4px;
 }
 
+.dropdowns i,
+.add-info i {
+  position: absolute;
+  z-index: 1;
+  font-size: 1.33em;
+  color: #b6dad5;
+  padding: 6px;
+}
+
+.dropdowns i#top { left: 282px; top: 64px; }
+.dropdowns i#middle { left: 282px; top: 109px; }
+.dropdowns i#bottom { left: 282px; top: 155px; }
+.add-info i#top { left: 170px; top: 54px;}
+.add-info i#bottom { left: 170px; top: 99px;}
+
 .ingredients input {
   position: relative;
   top: -14px;
@@ -307,6 +320,7 @@ textarea#notes {
 
 .add-info {
   background-color: #eee;
+  border-radius: 4px;
   padding: 14px;
   height: 256px;
 }
@@ -321,13 +335,16 @@ textarea#notes {
   color: #f15e51;
 }
 
+.add-info .upload {
+  margin-top: 14px;
+}
+
 .add-info input[type='file']{
   max-width: 100%;
   font-size: 0.785em;
 }
 
 .submit-button button {
-  border-radius: 4px;
   background-color: #b6dad5;
   margin: 14px 0px 28px;
   width: 100%;
@@ -337,6 +354,47 @@ textarea#notes {
 .submit-button h4 {
   margin: 7px 0px;
 }
+
+/********** Show All Content **********/
+.show-all h1 {
+  margin-top: 36px;
+}
+
+.show-all .link-button {
+  position: relative;
+  top: 48px;
+  left: 27px;
+  font-size: 2.369em;
+  padding: 0px 16px;
+  border-radius: 50%;
+  text-decoration: none;
+  background-color: #ddd;
+  box-shadow: 2px 2px 3px #bbb;
+}
+
+.recipe {
+  padding: 7px;
+}
+
+.recipe:nth-child(even) {
+  background-color: #eee;
+}
+
+.recipe .fav {
+  position: relative;
+  right: 29px;
+  top: 24px;
+  font-size: 1.333em;
+}
+
+.recipe .fav i {
+  /*color: rgba(241, 94, 81, 0.5);*/
+
+}
+
+
+
+
 
 /********** Show One Page **********/
 /*.line {

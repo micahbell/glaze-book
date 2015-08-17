@@ -21,6 +21,9 @@ form.add-new(action='/show-all' method='post')
         .row
           .medium-12.columns
             h3 Firing
+          i.fa.fa-angle-down#top
+          i.fa.fa-angle-down#middle
+          i.fa.fa-angle-down#bottom
           .medium-12.columns
             select(id='temp-range' name='temp_range' required)        
               option(disabled selected) Temperature Range
@@ -82,6 +85,9 @@ form.add-new(action='/show-all' method='post')
         .row
           .medium-12.columns
             h3 Appearance
+          i.fa.fa-angle-down#top
+          i.fa.fa-angle-down#middle
+          i.fa.fa-angle-down#bottom
           .medium-12.columns
             select(id='surface' name='surface' required)
               option(disabled selected) Surface
@@ -171,6 +177,8 @@ form.add-new(action='/show-all' method='post')
     .medium-4.columns
       .add-info
         h4 Additional Information
+        i.fa.fa-angle-down#top
+        i.fa.fa-angle-down#bottom
         select(id='specialty' name='specialty')
           option(disabled selected) Specialty Glaze
           option Crystalline
@@ -189,7 +197,7 @@ form.add-new(action='/show-all' method='post')
           option In Progress
           
         label(for='image') 
-          h4 Upload Image
+          h4.upload Upload Image
         input(type='file' id='image' name='image')
   
   .row.submit-button
