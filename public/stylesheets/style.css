@@ -19,6 +19,7 @@ dark warm gray: #767373
 a:visited,
 a:link {
   color: #555;
+  text-decoration: none;
 }
 
 .container {
@@ -67,6 +68,7 @@ textarea:focus {
 input[type='text'] {
   width: 100%;
   background: transparent;
+  border-radius: 0px;
   border-bottom: 2px solid #555;
   transition: border 0.4s;
 }
@@ -372,24 +374,32 @@ textarea#notes {
   box-shadow: 2px 2px 3px #bbb;
 }
 
-.recipe {
-  padding: 7px;
+.recipe:nth-child(odd),
+.recipe:nth-child(even) {
+  width: 100%;
+  margin: 0 auto;
 }
 
 .recipe:nth-child(even) {
   background-color: #eee;
 }
 
-.recipe .fav {
-  position: relative;
-  right: 29px;
-  top: 24px;
-  font-size: 1.333em;
+.recipe h3 {
+  color: #f15e51;
+  margin-top: 14px;
 }
 
-.recipe .fav i {
-  /*color: rgba(241, 94, 81, 0.5);*/
+.recipe p {
+  position: relative;
+  top: -10.5px;
+  margin-bottom: 14px;
+}
 
+.recipe .fav {
+  position: relative;
+  right: 23px;
+  top: 33px;
+  font-size: 1.333em;
 }
 
 
