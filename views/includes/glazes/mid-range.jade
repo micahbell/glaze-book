@@ -10,6 +10,11 @@ for val in midRecipe
       a(href='/glazes/' + val._id) IMG
     .medium-9.columns
       a(href='/glazes/' + val._id) #{val.title}
-      p #{val.tempRange} | #{val.cone} | #{val.surface}
+      p
+        | #{val.tempRange} 
+        span.pipe &nbsp;|&nbsp; 
+        |  #{val.cone} 
+        span.pipe &nbsp;|&nbsp; 
+        |  #{val.surface}
     .medium-1.columns
       p Fav

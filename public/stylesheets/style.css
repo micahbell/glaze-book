@@ -82,6 +82,10 @@ input[type="text"]:focus {
 ::-moz-placeholder { color: #ccc; }
 :-ms-input-placeholder { color: #ccc; }
 
+span.pipe {
+  color: #f15e51;
+}
+
 .footer {
   background-image: url('../images/bg-10-dark-blur.jpg');
   height: 42px;
