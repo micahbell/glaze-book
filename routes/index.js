@@ -322,7 +322,7 @@ router.post('/login', function(req, res, next) {
     if(!user) {
       res.render('index', { loginError: 'No account associated with this email, please create an account.', email: email });
     } else if(user) {
-      var compare = bcrypt.compareSync(password, user.password);
+      var compare = bcrypt.compareSync(password, user.password);  
       if(compare) {
         res.cookie('currentUser', user.username);
         res.cookie('userEmail', user.email);
