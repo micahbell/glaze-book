@@ -147,8 +147,8 @@ router.get('/glazes/surface/shiny', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        shinyRecipe: selectRecipes,
-        surface: 'shiny'
+        shinyRecipes: selectRecipes,
+        surface: 'Shiny or Glossy Glazes'
       })
     };
   });
@@ -162,8 +162,8 @@ router.get('/glazes/surface/semi', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        semiRecipe: selectRecipes,
-        surface: 'semi'
+        semiRecipes: selectRecipes,
+        surface: 'Semi-Gloss Glazes'
       })
     };
   });
@@ -177,8 +177,8 @@ router.get('/glazes/surface/satin', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        satinRecipe: selectRecipes,
-        surface: 'satin'
+        satinRecipes: selectRecipes,
+        surface: 'Semi-Matte or Satin Glazes'
       })
     };
   });
@@ -192,8 +192,8 @@ router.get('/glazes/surface/matte', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        matteRecipe: selectRecipes,
-        surface: 'matte'
+        matteRecipes: selectRecipes,
+        surface: 'Matte Glazes'
       })
     };
   });
@@ -207,8 +207,8 @@ router.get('/glazes/surface/dry', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        dryRecipe: selectRecipes,
-        surface: 'dry'
+        dryRecipes: selectRecipes,
+        surface: 'Dry Matte Glazes'
       })
     };
   });

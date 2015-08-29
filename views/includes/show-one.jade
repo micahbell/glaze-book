@@ -1,0 +1,101 @@
+.row 
+  .medium-2.columns
+    .image
+      p IMG
+  .medium-7.columns.content-h1
+    h1 #{oneRecipe.title}
+  .medium-3.columns
+    .row
+      .medium-6.columns
+        form(action='/glazes/' + oneRecipe._id + '/edit')
+          input.circle(type='submit' value='Edit')
+      .medium-6.columns
+        form(action='/glazes/' + oneRecipe._id + '/delete' method='post')
+          input.circle(type='submit' value='Delete')
+.row
+  .medium-4.columns.attributes
+    p Temperature Range 
+      br
+      #{oneRecipe.tempRange}
+    p Cone 
+      br
+      #{oneRecipe.cone}
+    p Type of Firing
+      br
+      #{oneRecipe.firingType}
+    p Surface
+      br
+      #{oneRecipe.surface}
+    p Opacity
+      br
+      #{oneRecipe.opacity}
+    p Color 
+      br
+      #{oneRecipe.color}
+    p Specialty 
+      br
+      #{oneRecipe.specialty}
+    p Tested 
+      br
+      #{oneRecipe.tested}
+  .medium-8.columns
+    .row
+      .medium-9.columns
+        h3 Base Ingredients
+        p.line #{ingredients[0]}
+        p.line #{ingredients[1]}
+        p.line #{ingredients[2]}
+        p.line #{ingredients[3]}
+        p.line #{ingredients[4]}
+        p.line #{ingredients[5]}
+        p.line #{ingredients[6]}
+        p.line #{ingredients[7]}
+        p.line #{ingredients[8]}
+        p.line #{ingredients[9]}
+      .medium-3.columns
+        h3 Amount
+        p.line #{amounts[0]}
+        p.line #{amounts[1]}
+        p.line #{amounts[2]}
+        p.line #{amounts[3]}
+        p.line #{amounts[4]}
+        p.line #{amounts[5]}
+        p.line #{amounts[6]}
+        p.line #{amounts[7]}
+        p.line #{amounts[8]}
+        p.line #{amounts[9]}
+    .row
+      .medium-9.columns
+        h3 Additional Ingredients
+        p.line #{addIngredients[0]}
+        p.line #{addIngredients[1]}
+        p.line #{addIngredients[2]}
+        p.line #{addIngredients[3]}
+        p.line #{addIngredients[4]}
+        p.line #{addIngredients[5]}
+      .medium-3.columns
+        h3 Amount
+        p.line #{addAmounts[0]}
+        p.line #{addAmounts[1]}
+        p.line #{addAmounts[2]}
+        p.line #{addAmounts[3]}
+        p.line #{addAmounts[4]}
+        p.line #{addAmounts[5]}
+    .row
+      .medium-12.columns.notes
+        h3 Notes
+        textarea(name='notes' rows=6) #{oneRecipe.notes}
+.row
+  .medium-12.columns.footer  
+    p Footer
+
+
+
+
+
+
+
+
+
+
+//

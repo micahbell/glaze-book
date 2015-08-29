@@ -50,31 +50,31 @@ block content
         .row
           .medium-12.columns
             if recipes
-              include includes/glazes/show-all
+              include includes/show-all
             else if oneRecipe
-              include includes/glazes/show-one
+              include includes/show-one
             else if editRecipe
-              include includes/glazes/edit
+              include includes/edit
             else if favRecipe
-              include includes/glazes/favorites
+              include includes/favorites
             else if lowRecipes
               include includes/range
             else if midRecipes
               include includes/range
             else if highRecipes
               include includes/range
-            else if shinyRecipe
-              include includes/glazes/shiny
-            else if semiRecipe
-              include includes/glazes/semi
-            else if satinRecipe
-              include includes/glazes/satin
-            else if matteRecipe
-              include includes/glazes/matte
-            else if dryRecipe
-              include includes/glazes/dry
+            else if shinyRecipes
+              include includes/surface
+            else if semiRecipes
+              include includes/surface
+            else if satinRecipes
+              include includes/surface
+            else if matteRecipes
+              include includes/surface
+            else if dryRecipes
+              include includes/surface
             else
-              include includes/glazes/new
+              include includes/new
 
 
 
