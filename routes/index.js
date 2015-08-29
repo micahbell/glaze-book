@@ -16,13 +16,13 @@ router.get('/glazes', function(req, res, next) {
 
 // All Recipes ====================
 router.get('/glazes/show-all', function(req, res, next) {
-  userCollection.findOne({ email: req.cookies.userEmail }, function(err, records) {
-    if(!records) {
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipes) {
+    if(!recipes) {
       res.redirect('/glazes');
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        recipes: records.glazeRecipes
+        recipes: recipes.glazeRecipes
       })
     };
   });
@@ -96,7 +96,6 @@ router.get('/glazes/firing-temp/low', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        meta: 'lowRecipes',
         lowRecipes: selectRecipes,
         firingTemp: 'Low Fire Glazes'
       })
@@ -217,8 +216,7 @@ router.get('/glazes/surface/dry', function(req, res, next) {
 // Favorites ====================
 router.get('/glazes/favorites', function(req, res, next) {
   userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipes) {
-    var recipeArray = recipes.glazeRecipes;
-    var recipes = database.favFinder(recipeArray);
+    var recipes = database.favFinder(recipes.glazeRecipes);
     if(recipes.length === 0) {
       res.redirect('/glazes/show-all');
     } else {
@@ -232,9 +230,8 @@ router.get('/glazes/favorites', function(req, res, next) {
 
 // Recently Added ====================
 router.get('/glazes/recently-added', function(req, res, next) {
-  var emailCookie = req.cookies.userEmail;
 //   $natural: -1 ?
-//   userCollection.findOne({ email: emailCookie }, function(err, recentRecipe) {
+//   userCollection.findOne({ email: req.cookies.userEmail }, function(err, recentRecipe) {
 //     console.log('++++++++++++++++++++', recentRecipe);
 //     var recipeArray = recentRecipe.glazeRecipes;
 //     console.log('--------------------', recipeArray);
@@ -243,15 +240,13 @@ router.get('/glazes/recently-added', function(req, res, next) {
 
 // Show One ====================
 router.get('/glazes/:id', function(req, res, next) {
-  userCollection.findOne({ email: req.cookies.userEmail }, function(err, allRecipes) {
-    var recipeID = req.params.id;
-    var recipeArray = allRecipes.glazeRecipes;
-    var recipe = database.recipeFinder(recipeID, recipeArray);
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
+    var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
     var ingredients = recipe.ingredients;
     var amounts = recipe.amounts;
     var addIngredients = recipe.addIns;
     var addAmounts = recipe.addAmounts;
-    if(allRecipes) {
+    if(recipe) {
       res.render('glazes', {
         oneRecipe: recipe,
         ingredients: ingredients,
@@ -266,15 +261,13 @@ router.get('/glazes/:id', function(req, res, next) {
 
 // Edit ====================
 router.get('/glazes/:id/edit', function(req, res, next) {
-  userCollection.findOne({ email: req.cookies.userEmail }, function(err, editRecipe) {
-    var recipeID = req.params.id;
-    var recipeArray = editRecipe.glazeRecipes;
-    var recipe = database.recipeFinder(recipeID, recipeArray);
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
+    var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
     var ingredients = recipe.ingredients;
     var amounts = recipe.amounts;
     var addIngredients = recipe.addIns;
     var addAmounts = recipe.addAmounts;
-    if(editRecipe) {
+    if(recipe) {
       res.render('glazes', {
         editRecipe: recipe,
         ingredients: ingredients,
@@ -355,35 +348,13 @@ router.post('/show-all', function(req, res, next) {
 });
 
 // Submit Edit ====================
-
-// router.post('/glazes/:id/edit', function (req, res, next) {
-//   var emailCookie = req.cookies.userEmail;
-//   userCollection.findOne({ email: emailCookie }, function(err, recipe) {
-//     var recipeID = req.params.id;
-//     var recipeArray = recipe.glazeRecipes;
-//     var recipe = database.recipeFinder(recipeID, recipeArray);
-//     var date = recipe.dateAdded;
-//     userCollection.update({ email: emailCookie },
-//       { $set:
-//         { glazeRecipes:
-//           { dateAdded: date }
-//         }
-//       }
-//     );
-//   });
-// });
-
 router.post('/glazes/:id/edit', function(req, res, next) {
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, recipe) {
-    var recipeID = req.params.id;
-    var recipeArray = recipe.glazeRecipes;
-    var recipe = database.recipeFinder(recipeID, recipeArray);
-    var date = recipe.dateAdded;
-    userCollection.update({ email: emailCookie },
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
+    var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
+    userCollection.update({ email: req.cookies.userEmail },
       { $pull:
         { glazeRecipes:
-          { dateAdded: date }
+          { dateAdded: recipe.dateAdded }
         }
       }
     );
@@ -391,7 +362,7 @@ router.post('/glazes/:id/edit', function(req, res, next) {
 
   var date = Date();
   var recipeID = userCollection.id();
-  userCollection.update({ email: emailCookie },
+  userCollection.update({ email: req.cookies.userEmail },
     { $push:
       { glazeRecipes: {
         _id: recipeID,
@@ -405,7 +376,7 @@ router.post('/glazes/:id/edit', function(req, res, next) {
         opacity: req.body.opacity,
         color: req.body.color,
         specialty: req.body.specialty,
-        testStatus: req.body.text_status,
+        testStatus: req.body.test_status,
         ingredients: [
           req.body.ingredient_1,
           req.body.ingredient_2,
@@ -455,18 +426,31 @@ router.post('/glazes/:id/edit', function(req, res, next) {
   res.redirect('/glazes/show-all');
 });
 
+// router.post('/glazes/:id/edit', function (req, res, next) {
+//   var emailCookie = req.cookies.userEmail;
+//   userCollection.findOne({ email: emailCookie }, function(err, recipe) {
+//     var recipeID = req.params.id;
+//     var recipeArray = recipe.glazeRecipes;
+//     var recipe = database.recipeFinder(recipeID, recipeArray);
+//     var date = recipe.dateAdded;
+//     userCollection.update({ email: emailCookie },
+//       { $set:
+//         { glazeRecipes:
+//           { dateAdded: date }
+//         }
+//       }
+//     );
+//   });
+// });
+
 // Submit Delete ====================
 router.post('/glazes/:id/delete', function(req, res, next) {
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, recipe) {
-    var recipeID = req.params.id;
-    var recipeArray = recipe.glazeRecipes;
-    var recipe = database.recipeFinder(recipeID, recipeArray);
-    var date = recipe.dateAdded;
-    userCollection.update({ email: emailCookie },
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
+    var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
+    userCollection.update({ email: req.cookies.userEmail },
       { $pull:
         { glazeRecipes:
-          { dateAdded: date }
+          { dateAdded: recipe.dateAdded }
         }
       }
     );
