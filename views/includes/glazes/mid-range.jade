@@ -1,10 +1,10 @@
 .row
   .medium-10.columns.show-h1
-    h1 Mid Range Glazes
+    h1= firingTemp
   .medium-2.columns
     a.add-button(href='/glazes') +
 
-for val in midRecipe
+for val in midRecipes
   .row.recipe
     .medium-2.columns
       a(href='/glazes/' + val._id) IMAGE

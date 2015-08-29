@@ -116,9 +116,17 @@ h4 { font-size: 1.333em; }
 small, .font-small { font-size: 0.875em; }
 
 /********** Login Page **********/
+.login-page { background-image: url('../images/bg-10-blur.jpg'); }
+
+.login-page {
+  height: 602px;
+  padding: 28px;
+}
+
 p.errors {
   color: #f15e51;
 }
+
 
 /********** Primary Nav **********/
 .primary-nav {

@@ -96,8 +96,9 @@ router.get('/glazes/firing-temp/low', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        lowRecipe: selectRecipes,
-        firingTemp: 'low'
+        meta: 'lowRecipes',
+        lowRecipes: selectRecipes,
+        firingTemp: 'Low Fire Glazes'
       })
     };
   });
@@ -111,8 +112,8 @@ router.get('/glazes/firing-temp/mid', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        midRecipe: selectRecipes,
-        firingTemp: 'mid'
+        midRecipes: selectRecipes,
+        firingTemp: 'Mid Range Glazes'
       })
     };
   });
@@ -126,8 +127,8 @@ router.get('/glazes/firing-temp/high', function(req, res, next) {
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        highRecipe: selectRecipes,
-        firingTemp: 'high'
+        highRecipes: selectRecipes,
+        firingTemp: 'High Fire Glazes'
       })
     };
   });

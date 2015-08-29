@@ -2,39 +2,41 @@ extends layout
 
 block content
   .container
-    .row
+    .row.login-page 
       .medium-12.columns
-        p The Glazebook
-        p Join or log in to save and share your glaze recipes.
-  
-    .row  
-      .medium-6.columns.main-content
-        p Sign Up (All fields are required)
-        if signupError  
-          include includes/users/signup-errors
-        else
-          form(action='/signup' method='post')
-            input(type='text' placeholder='Username' name='username')
-            p
-            input(type='email' placeholder='Email' name='signup_email')
-            p
-            input(type='password' placeholder='Password' name='signup_password')
-            p
-            input(type='password' placeholder='Confirm Password' name='signup_confirm')
-            p
-            input(type='submit' value='Sign Up')
-          
-      .medium-6.columns.main-content
-        p Log In
-        if loginError
-          include includes/users/login-errors
-        else
-          form(action='/login' method='post')
-            input(type='email' placeholder='Email' name='login_email')
-            p
-            input(type='password' placeholder='Password' name='login_password')
-            p
-            input(type='submit' value='Log In')
+        .row
+          .medium-12.columns
+            p The Glazebook
+            p Join or log in to save and share your glaze recipes.
+      
+        .row
+          .medium-6.columns.main-content
+            p Sign Up (All fields are required)
+            if signupError  
+              include includes/users/signup-errors
+            else
+              form(action='/signup' method='post')
+                input(type='text' placeholder='Username' name='username')
+                p
+                input(type='email' placeholder='Email' name='signup_email')
+                p
+                input(type='password' placeholder='Password' name='signup_password')
+                p
+                input(type='password' placeholder='Confirm Password' name='signup_confirm')
+                p
+                input(type='submit' value='Sign Up')
+              
+          .medium-6.columns.main-content
+            p Log In
+            if loginError
+              include includes/users/login-errors
+            else
+              form(action='/login' method='post')
+                input(type='email' placeholder='Email' name='login_email')
+                p
+                input(type='password' placeholder='Password' name='login_password')
+                p
+                input(type='submit' value='Log In')
           
       
           
