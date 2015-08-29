@@ -16,13 +16,13 @@ router.get('/glazes', function(req, res, next) {
 
 // All Recipes ====================
 router.get('/glazes/show-all', function(req, res, next) {
-  userCollection.findOne({ email: req.cookies.userEmail }, function(err, record) {
-    if(!record) {
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, records) {
+    if(!records) {
       res.redirect('/glazes');
     } else {
       res.render('glazes', {
         currentUser: req.cookies.currentUser,
-        recipes: record.glazeRecipes
+        recipes: records.glazeRecipes
       })
     };
   });

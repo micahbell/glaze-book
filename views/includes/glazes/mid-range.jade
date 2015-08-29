@@ -1,20 +1,25 @@
 .row
-  .medium-10.columns
+  .medium-10.columns.show-h1
     h1 Mid Range Glazes
   .medium-2.columns
-    a(href='/glazes') ADD
+    a.add-button(href='/glazes') +
 
 for val in midRecipe
-  .row
+  .row.recipe
     .medium-2.columns
-      a(href='/glazes/' + val._id) IMG
+      a(href='/glazes/' + val._id) IMAGE
     .medium-9.columns
-      a(href='/glazes/' + val._id) #{val.title}
+      a(href='/glazes/' + val._id) 
+        h3 #{val.title}
       p
         | #{val.tempRange} 
         span.pipe &nbsp;|&nbsp; 
         |  #{val.cone} 
         span.pipe &nbsp;|&nbsp; 
         |  #{val.surface}
-    .medium-1.columns
-      p Fav
+    .medium-1.columns.fav
+      if val.Favorite
+        i.fa.fa-heart
+
+.row
+  .medium-12.columns.footer
