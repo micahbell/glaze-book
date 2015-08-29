@@ -1,10 +1,33 @@
 .row
   .medium-12.columns
     h3.category-header Surface Texture
-
-for val in surface
-  .row
-    .medium-12.columns
-      form(method='get' action='/glazes/surface/' + val.surface)
-        button(type='submit')
-          h4= val.title
+    
+.row
+  .medium-12.columns
+    form(method='get' action='/glazes/surface/shiny')
+      button(type='submit')
+        h4 Shiny or Glossy
+.row
+  .medium-12.columns
+    form(method='get' action='/glazes/surface/semi')
+      button(type='submit')
+        h4 Semi-Gloss
+.row
+  .medium-12.columns
+    form(method='get' action='/glazes/surface/satin')
+      button(type='submit')
+        h4 Semi-matte or Satin
+.row
+  .medium-12.columns
+    form(method='get' action='/glazes/surface/matte')
+      button(type='submit')
+        h4 Matte
+.row
+  .medium-12.columns
+    form(method='get' action='/glazes/surface/dry')
+      button(type='submit')
+        h4 Dry Matte
+        
+        
+        
+//

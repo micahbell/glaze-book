@@ -28,201 +28,200 @@ router.get('/glazes/show-all', function(req, res, next) {
   });
 });
 
+// Signup ====================
+router.post('/signup', function(req, res, next) {
+  var username = req.body.username.trim();
+  var email = req.body.signup_email.toLowerCase().trim();
+  var password = req.body.signup_password.trim();
+  var confirm = req.body.signup_confirm.trim();
+  var hash = bcrypt.hashSync(password, 8);
+
+  userValidation.existingUser(email, function(duplicateError) {
+    var validate = userValidation.signupValidation(username, email, password, confirm, duplicateError);
+    if(validate.length != 0) {
+      res.render('index', { signupError: validate, username: username, email: email });
+    } else {
+      userCollection.insert({
+        username: username,
+        email: email,
+        password: hash,
+        glazeRecipes: []
+      });
+      res.cookie('currentUser', username );
+      res.cookie('userEmail', email );
+      res.redirect('/glazes');
+    }
+  });
+});
+
+// Login and Logout ====================
+router.post('/login', function(req, res, next) {
+  var email = req.body.login_email.toLowerCase().trim();
+  var password = req.body.login_password.trim();
+  userCollection.findOne({ email: email }, function(err, user) {
+    if(!user) {
+      res.render('index', { loginError: 'No account associated with this email, please create an account.', email: email });
+    } else if(user) {
+      var compare = bcrypt.compareSync(password, user.password);
+      if(compare) {
+        res.cookie('currentUser', user.username);
+        res.cookie('userEmail', user.email);
+        res.redirect('/glazes');
+      } else {
+        res.render('index', { loginError: 'Invalid password.', email: email });
+      }
+    }
+  });
+});
+
+router.post('/logout', function(req, res, next) {
+  res.clearCookie('currentUser');
+  res.clearCookie('userEmail');
+  res.redirect('/');
+});
+
 // Firing Temps ====================
 router.get('/glazes/firing-temp', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  res.render('glazes', { currentUser: userCookie, firingTemp: [
-    { range: 'low', title: 'Low Fire' },
-    { range: 'mid', title: 'Mid Range' },
-    { range: 'high', title: 'High Fire' }]
-  });
+  res.render('glazes', {
+    currentUser: req.cookies.currentUser,
+    firingTemp: 'temps'
+  })
 });
 
 // Low Range ====================
 router.get('/glazes/firing-temp/low', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function (err, lowRangeRecipes) {
-    var recipeArray = lowRangeRecipes.glazeRecipes;
-    var lowRecipe = database.lowRangeFinder(recipeArray);
-    if(lowRecipe.length === 0) {
+  database.recipeFilter(req.cookies.userEmail, 'tempRange', 'Low Fire', function(selectRecipes) {
+    if(selectRecipes.length === 0) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, lowRecipe: lowRecipe, firingTemp: [
-        { range: 'low', title: 'Low Fire' },
-        { range: 'mid', title: 'Mid Range' },
-        { range: 'high', title: 'High Fire' }]
-      });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        lowRecipe: selectRecipes,
+        firingTemp: 'low'
+      })
     };
   });
 });
 
 // Mid Range ====================
 router.get('/glazes/firing-temp/mid', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function (err, midRangeRecipes) {
-    var recipeArray = midRangeRecipes.glazeRecipes;
-    var midRecipe = database.midRangeFinder(recipeArray);
-    if(midRecipe.length === 0) {
+  database.recipeFilter(req.cookies.userEmail, 'tempRange', 'Mid Range', function(selectRecipes) {
+    if(selectRecipes.length === 0) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, midRecipe: midRecipe, firingTemp: [
-        { range: 'low', title: 'Low Fire' },
-        { range: 'mid', title: 'Mid Range' },
-        { range: 'high', title: 'High Fire' }]
-      });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        midRecipe: selectRecipes,
+        firingTemp: 'mid'
+      })
     };
   });
 });
 
 // High Range ====================
 router.get('/glazes/firing-temp/high', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function (err, highRangeRecipes) {
-    var recipeArray = highRangeRecipes.glazeRecipes;
-    var highRecipe = database.highRangeFinder(recipeArray);
-    if(highRecipe.length === 0) {
+  database.recipeFilter(req.cookies.userEmail, 'tempRange', 'High Fire', function(selectRecipes) {
+    if(selectRecipes.length === 0) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, highRecipe: highRecipe, firingTemp: [
-        { range: 'low', title: 'Low Fire' },
-        { range: 'mid', title: 'Mid Range' },
-        { range: 'high', title: 'High Fire' }]
-      });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        highRecipe: selectRecipes,
+        firingTemp: 'high'
+      })
     };
   });
 });
 
 // Surface ====================
 router.get('/glazes/surface', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  res.render('glazes', { currentUser: userCookie, surface: [
-    { surface: 'shiny', title: 'Shiny or Glossy' },
-    { surface: 'semi', title: 'Semi-gloss' },
-    { surface: 'satin', title: 'Semi-matte or Satin' },
-    { surface: 'matte', title: 'Matte' },
-    { surface: 'dry', title: 'Dry Matte' }]
-  });
+  res.render('glazes', { currentUser: req.cookies.currentUser, surface: 'surface' })
 });
 
-// Surface - Shiny ====================
+// Shiny ====================
 router.get('/glazes/surface/shiny', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, shinyRecipes) {
-    var recipeArray = shinyRecipes.glazeRecipes;
-    var shinyRecipe = database.shinyFinder(recipeArray);
-    if(shinyRecipe.length === 0) {
+  database.recipeFilter(req.cookies.userEmail, 'surface', 'Shiny or Glossy', function(selectRecipes) {
+    if(selectRecipes.length === 0) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, shinyRecipe: shinyRecipe, surface: [
-        { surface: 'shiny', title: 'Shiny or Glossy' },
-        { surface: 'semi', title: 'Semi-gloss' },
-        { surface: 'satin', title: 'Semi-matte or Satin' },
-        { surface: 'matte', title: 'Matte' },
-        { surface: 'dry', title: 'Dry Matte' }]
-      });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        shinyRecipe: selectRecipes,
+        surface: 'shiny'
+      })
     };
   });
 });
 
-// Surface - Semi-Gloss ====================
+// Semi-Gloss ====================
 router.get('/glazes/surface/semi', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, semiRecipes) {
-    var recipeArray = semiRecipes.glazeRecipes;
-    var semiRecipe = database.semiFinder(recipeArray);
-    if(semiRecipe.length === 0) {
+  database.recipeFilter(req.cookies.userEmail, 'surface', 'Semi-Gloss', function(selectRecipes) {
+    if(selectRecipes.length === 0) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, semiRecipe: semiRecipe, surface: [
-        { surface: 'shiny', title: 'Shiny or Glossy' },
-        { surface: 'semi', title: 'Semi-gloss' },
-        { surface: 'satin', title: 'Semi-matte or Satin' },
-        { surface: 'matte', title: 'Matte' },
-        { surface: 'dry', title: 'Dry Matte' }]
-      });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        semiRecipe: selectRecipes,
+        surface: 'semi'
+      })
     };
   });
 });
 
-// Surface - Satin ====================
+// Satin ====================
 router.get('/glazes/surface/satin', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, satinRecipes) {
-    var recipeArray = satinRecipes.glazeRecipes;
-    var satinRecipe = database.satinFinder(recipeArray);
-    if(satinRecipe.length === 0) {
+  database.recipeFilter(req.cookies.userEmail, 'surface', 'Semi-Matte or Satin', function(selectRecipes) {
+    if(selectRecipes.length === 0) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, satinRecipe: satinRecipe, surface: [
-        { surface: 'shiny', title: 'Shiny or Glossy' },
-        { surface: 'semi', title: 'Semi-gloss' },
-        { surface: 'satin', title: 'Semi-matte or Satin' },
-        { surface: 'matte', title: 'Matte' },
-        { surface: 'dry', title: 'Dry Matte' }]
-      });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        satinRecipe: selectRecipes,
+        surface: 'satin'
+      })
     };
   });
 });
 
-// Surface - Matte ====================
+// Matte ====================
 router.get('/glazes/surface/matte', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, matteRecipes) {
-    var recipeArray = matteRecipes.glazeRecipes;
-    var matteRecipe = database.matteFinder(recipeArray);
-    if(matteRecipe.length === 0) {
+  database.recipeFilter(req.cookies.userEmail, 'surface', 'Matte', function(selectRecipes) {
+    if(selectRecipes.length === 0) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, matteRecipe: matteRecipe, surface: [
-        { surface: 'shiny', title: 'Shiny or Glossy' },
-        { surface: 'semi', title: 'Semi-gloss' },
-        { surface: 'satin', title: 'Semi-matte or Satin' },
-        { surface: 'matte', title: 'Matte' },
-        { surface: 'dry', title: 'Dry Matte' }]
-      });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        matteRecipe: selectRecipes,
+        surface: 'matte'
+      })
     };
   });
 });
 
-// Surface - Dry ====================
+// Dry ====================
 router.get('/glazes/surface/dry', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, dryRecipes) {
-    var recipeArray = dryRecipes.glazeRecipes;
-    var dryRecipe = database.dryFinder(recipeArray);
-    if(dryRecipe.length === 0) {
+  database.recipeFilter(req.cookies.userEmail, 'surface', 'Dry Matte', function(selectRecipes) {
+    if(selectRecipes.length === 0) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, dryRecipe: dryRecipe, surface: [
-        { surface: 'shiny', title: 'Shiny or Glossy' },
-        { surface: 'semi', title: 'Semi-gloss' },
-        { surface: 'satin', title: 'Semi-matte or Satin' },
-        { surface: 'matte', title: 'Matte' },
-        { surface: 'dry', title: 'Dry Matte' }]
-      });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        dryRecipe: selectRecipes,
+        surface: 'dry'
+      })
     };
   });
 });
 
 // Favorites ====================
 router.get('/glazes/favorites', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, favRecipe) {
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, favRecipe) {
     var recipeArray = favRecipe.glazeRecipes;
     var favRecipe = database.favFinder(recipeArray);
     if(favRecipe.length === 0) {
       res.redirect('/glazes/show-all');
     } else {
-    res.render('glazes', { currentUser: userCookie, favRecipe: favRecipe });
+    res.render('glazes', { currentUser: req.cookies.currentUser, favRecipe: favRecipe });
     };
   });
 });
@@ -288,58 +287,6 @@ router.get('/glazes/:id/edit', function(req, res, next) {
   });
 });
 
-// Signup ====================
-router.post('/signup', function(req, res, next) {
-  var username = req.body.username.trim();
-  var email = req.body.signup_email.toLowerCase().trim();
-  var password = req.body.signup_password.trim();
-  var confirm = req.body.signup_confirm.trim();
-  var hash = bcrypt.hashSync(password, 8);
-
-  userValidation.existingUser(email, function(duplicateError) {
-    var validate = userValidation.signupValidation(username, email, password, confirm, duplicateError);
-    if(validate.length != 0) {
-      res.render('index', { signupError: validate, username: username, email: email });
-    } else {
-      userCollection.insert({
-        username: username,
-        email: email,
-        password: hash,
-        glazeRecipes: []
-      });
-      res.cookie('currentUser', username );
-      res.cookie('userEmail', email );
-      res.redirect('/glazes');
-    }
-  });
-});
-
-// Login and Logout ====================
-router.post('/login', function(req, res, next) {
-  var email = req.body.login_email.toLowerCase().trim();
-  var password = req.body.login_password.trim();
-  userCollection.findOne({ email: email }, function(err, user) {
-    if(!user) {
-      res.render('index', { loginError: 'No account associated with this email, please create an account.', email: email });
-    } else if(user) {
-      var compare = bcrypt.compareSync(password, user.password);  
-      if(compare) {
-        res.cookie('currentUser', user.username);
-        res.cookie('userEmail', user.email);
-        res.redirect('/glazes');
-      } else {
-        res.render('index', { loginError: 'Invalid password.', email: email });
-      }
-    }
-  });
-});
-
-router.post('/logout', function(req, res, next) {
-  res.clearCookie('currentUser');
-  res.clearCookie('userEmail');
-  res.redirect('/');
-});
-
 // Show All ====================
 router.post('/show-all', function(req, res, next) {
   var date = Date();
@@ -400,7 +347,6 @@ router.post('/show-all', function(req, res, next) {
           req.body.add_amount_5,
           req.body.add_amount_6
         ],
-        tested: req.body.tested,
         notes: req.body.notes,
         image: req.body.image
       }

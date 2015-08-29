@@ -1,10 +1,19 @@
 .row
   .medium-12.columns
     h3.category-header Temperature Range
-
-for val in firingTemp
-  .row
-    .medium-12.columns
-      form(method='get' action='/glazes/firing-temp/' + val.range)
-        button(type='submit')
-          h4= val.title
+    
+.row
+  .medium-12.columns
+    form(method='get' action='/glazes/firing-temp/low')
+      button(type='submit')
+        h4 Low Fire
+.row
+  .medium-12.columns
+    form(method='get' action='/glazes/firing-temp/mid')
+      button(type='submit')
+        h4 Mid Range
+.row
+  .medium-12.columns
+    form(method='get' action='/glazes/firing-temp/high')
+      button(type='submit')
+        h4 High Range
