@@ -11,19 +11,19 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/glazes', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  res.render('glazes', { currentUser: userCookie });
+  res.render('glazes', { currentUser: req.cookies.currentUser });
 });
 
 // All Recipes ====================
 router.get('/glazes/show-all', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, record) {
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, record) {
     if(!record) {
       res.redirect('/glazes');
     } else {
-      res.render('glazes', { currentUser: userCookie, recipes: record.glazeRecipes });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        recipes: record.glazeRecipes
+      })
     };
   });
 });
@@ -215,13 +215,16 @@ router.get('/glazes/surface/dry', function(req, res, next) {
 
 // Favorites ====================
 router.get('/glazes/favorites', function(req, res, next) {
-  userCollection.findOne({ email: req.cookies.userEmail }, function(err, favRecipe) {
-    var recipeArray = favRecipe.glazeRecipes;
-    var favRecipe = database.favFinder(recipeArray);
-    if(favRecipe.length === 0) {
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipes) {
+    var recipeArray = recipes.glazeRecipes;
+    var recipes = database.favFinder(recipeArray);
+    if(recipes.length === 0) {
       res.redirect('/glazes/show-all');
     } else {
-    res.render('glazes', { currentUser: req.cookies.currentUser, favRecipe: favRecipe });
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        favRecipe: recipes
+      })
     };
   });
 });
@@ -239,9 +242,7 @@ router.get('/glazes/recently-added', function(req, res, next) {
 
 // Show One ====================
 router.get('/glazes/:id', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, allRecipes) {
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, allRecipes) {
     var recipeID = req.params.id;
     var recipeArray = allRecipes.glazeRecipes;
     var recipe = database.recipeFinder(recipeID, recipeArray);
@@ -256,7 +257,7 @@ router.get('/glazes/:id', function(req, res, next) {
         amounts: amounts,
         addIngredients: addIngredients,
         addAmounts: addAmounts,
-        currentUser: userCookie
+        currentUser: req.cookies.currentUser
       });
     };
   });
@@ -264,9 +265,7 @@ router.get('/glazes/:id', function(req, res, next) {
 
 // Edit ====================
 router.get('/glazes/:id/edit', function(req, res, next) {
-  var userCookie = req.cookies.currentUser;
-  var emailCookie = req.cookies.userEmail;
-  userCollection.findOne({ email: emailCookie }, function(err, editRecipe) {
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, editRecipe) {
     var recipeID = req.params.id;
     var recipeArray = editRecipe.glazeRecipes;
     var recipe = database.recipeFinder(recipeID, recipeArray);
@@ -281,7 +280,7 @@ router.get('/glazes/:id/edit', function(req, res, next) {
         amounts: amounts,
         addIngredients: addIngredients,
         addAmounts: addAmounts,
-        currentUser: userCookie
+        currentUser: req.cookies.currentUser
       });
     };
   });
@@ -291,8 +290,7 @@ router.get('/glazes/:id/edit', function(req, res, next) {
 router.post('/show-all', function(req, res, next) {
   var date = Date();
   var recipeID = userCollection.id();
-  var emailCookie = req.cookies.userEmail;
-  userCollection.update({ email: emailCookie },
+  userCollection.update({ email: req.cookies.userEmail },
     { $push:
       { glazeRecipes: {
         _id: recipeID,
