@@ -428,6 +428,10 @@ textarea#notes {
   font-size: 1.333em;
 }
 
+.footer-pusher {
+  min-height: 373px;
+}
+
 
 
 

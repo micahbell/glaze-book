@@ -4,95 +4,96 @@
   .medium-2.columns
     a.add-button(href='/glazes') +
     
-if shinyRecipes
-  for val in shinyRecipes
-    .row.recipe
-      .medium-2.columns
-        a(href='/glazes/' + val._id) IMAGE
-      .medium-9.columns
-        a(href='/glazes/' + val._id) 
-          h3 #{val.title}
-        p
-          | #{val.tempRange} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.cone} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.surface}
-      .medium-1.columns.fav
-        if val.Favorite
-          i.fa.fa-heart
-          
-if semiRecipes
-  for val in semiRecipes
-    .row.recipe
-      .medium-2.columns
-        a(href='/glazes/' + val._id) IMAGE
-      .medium-9.columns
-        a(href='/glazes/' + val._id) 
-          h3 #{val.title}
-        p
-          | #{val.tempRange} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.cone} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.surface}
-      .medium-1.columns.fav
-        if val.Favorite
-          i.fa.fa-heart
-          
-if satinRecipes
-  for val in satinRecipes
-    .row.recipe
-      .medium-2.columns
-        a(href='/glazes/' + val._id) IMAGE
-      .medium-9.columns
-        a(href='/glazes/' + val._id) 
-          h3 #{val.title}
-        p
-          | #{val.tempRange} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.cone} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.surface}
-      .medium-1.columns.fav
-        if val.Favorite
-          i.fa.fa-heart
-          
-if matteRecipes
-  for val in matteRecipes
-    .row.recipe
-      .medium-2.columns
-        a(href='/glazes/' + val._id) IMAGE
-      .medium-9.columns
-        a(href='/glazes/' + val._id) 
-          h3 #{val.title}
-        p
-          | #{val.tempRange} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.cone} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.surface}
-      .medium-1.columns.fav
-        if val.Favorite
-          i.fa.fa-heart
-          
-if dryRecipes
-  for val in dryRecipes
-    .row.recipe
-      .medium-2.columns
-        a(href='/glazes/' + val._id) IMAGE
-      .medium-9.columns
-        a(href='/glazes/' + val._id) 
-          h3 #{val.title}
-        p
-          | #{val.tempRange} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.cone} 
-          span.pipe &nbsp;|&nbsp; 
-          |  #{val.surface}
-      .medium-1.columns.fav
-        if val.Favorite
-          i.fa.fa-heart
+.footer-pusher    
+  if shinyRecipes
+    for val in shinyRecipes
+      .row.recipe
+        .medium-2.columns
+          a(href='/glazes/' + val._id) IMAGE
+        .medium-9.columns
+          a(href='/glazes/' + val._id) 
+            h3 #{val.title}
+          p
+            | #{val.tempRange} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.cone} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.surface}
+        .medium-1.columns.fav
+          if val.Favorite
+            i.fa.fa-heart
+            
+  if semiRecipes
+    for val in semiRecipes
+      .row.recipe
+        .medium-2.columns
+          a(href='/glazes/' + val._id) IMAGE
+        .medium-9.columns
+          a(href='/glazes/' + val._id) 
+            h3 #{val.title}
+          p
+            | #{val.tempRange} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.cone} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.surface}
+        .medium-1.columns.fav
+          if val.Favorite
+            i.fa.fa-heart
+            
+  if satinRecipes
+    for val in satinRecipes
+      .row.recipe
+        .medium-2.columns
+          a(href='/glazes/' + val._id) IMAGE
+        .medium-9.columns
+          a(href='/glazes/' + val._id) 
+            h3 #{val.title}
+          p
+            | #{val.tempRange} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.cone} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.surface}
+        .medium-1.columns.fav
+          if val.Favorite
+            i.fa.fa-heart
+            
+  if matteRecipes
+    for val in matteRecipes
+      .row.recipe
+        .medium-2.columns
+          a(href='/glazes/' + val._id) IMAGE
+        .medium-9.columns
+          a(href='/glazes/' + val._id) 
+            h3 #{val.title}
+          p
+            | #{val.tempRange} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.cone} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.surface}
+        .medium-1.columns.fav
+          if val.Favorite
+            i.fa.fa-heart
+            
+  if dryRecipes
+    for val in dryRecipes
+      .row.recipe
+        .medium-2.columns
+          a(href='/glazes/' + val._id) IMAGE
+        .medium-9.columns
+          a(href='/glazes/' + val._id) 
+            h3 #{val.title}
+          p
+            | #{val.tempRange} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.cone} 
+            span.pipe &nbsp;|&nbsp; 
+            |  #{val.surface}
+        .medium-1.columns.fav
+          if val.Favorite
+            i.fa.fa-heart
 
 .row
   .medium-12.columns.footer
