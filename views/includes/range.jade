@@ -9,8 +9,7 @@
     for val in lowRecipes
       .row.recipe
         .medium-2.columns.image
-          img.glaze-test(src='/images/' + val.color + '.png')
-          //- a(href='/glazes/' + val._id) IMAGE
+          img.glaze-test(src='/images/colors/' + val.color + '.png')
         .medium-9.columns
           a(href='/glazes/' + val._id) 
             h3 #{val.title}
@@ -28,7 +27,7 @@
     for val in midRecipes
       .row.recipe
         .medium-2.columns
-          img.glaze-test(src='/images/' + val.color + '.png')
+          img.glaze-test(src='/images/colors/' + val.color + '.png')
         .medium-9.columns
           a(href='/glazes/' + val._id) 
             h3 #{val.title}
@@ -46,7 +45,7 @@
     for val in highRecipes
       .row.recipe
         .medium-2.columns
-          img.glaze-test(src='/images/' + val.color + '.png')
+          img.glaze-test(src='/images/colors/' + val.color + '.png')
         .medium-9.columns
           a(href='/glazes/' + val._id) 
             h3 #{val.title}
