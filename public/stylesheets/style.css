@@ -38,7 +38,7 @@ body, .primary-nav, .secondary-nav, .content {
   background-size: cover;
 }
 
-body { background-image: url('../images/bg-10.jpg'); }
+body { background: url('../images/bg-10.jpg'); }
 .primary-nav { background-image: url('../images/bg-10-dark-blur.jpg'); }
 .secondary-nav { background-image: url('../images/bg-10-blur.jpg'); }
 .content { background-image: url('../images/bg-10-light-blur.jpg'); }
@@ -334,14 +334,14 @@ i.fa.fa-heart {
 }
 
 textarea#notes {
-  height: 342px;
+  height: 354px;
 }
 
 .add-info {
   background-color: #eee;
   border-radius: 4px;
   padding: 14px;
-  height: 256px;
+  height: 262px;
 }
 
 .add-info select:nth-child(3) {
@@ -378,8 +378,8 @@ textarea#notes {
   margin: 7px 0px;
 }
 
-/********** Show All Content **********/
-.show-h1 h1 {
+/**********  All Content **********/
+h1 {
   margin-top: 50px;
 }
 
@@ -399,6 +399,10 @@ textarea#notes {
   box-shadow: 0px 0px 1px #bbb;
 }
 
+.glaze-test {
+  margin: 10px 0px 0px 2px;
+}
+
 .recipe:nth-child(odd),
 .recipe:nth-child(even) {
   width: 100%;
@@ -406,7 +410,7 @@ textarea#notes {
   border-radius: 4px;
 }
 
-.recipe:nth-child(even) {
+.recipe:nth-child(odd) {
   background-color: #eee;
 }
 
@@ -436,7 +440,7 @@ textarea#notes {
 
 
 
-/********** Show One Page **********/
+/**********  One Page **********/
 /*.line {
   border-bottom: 1px solid #dcd9d9;
 }
