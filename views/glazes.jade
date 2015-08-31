@@ -7,22 +7,18 @@ block content
         if currentUser
           button#user
             img(src='/images/user.png')
-            //- img(src='http://i60.tinypic.com/x26t.png')
             p.light-text.font-small #{currentUser}
         form(action='/glazes/show-all' method='get')
           button(type='submit') 
             img(src='/images/recipes.png')
-            //- img(src='http://i61.tinypic.com/zyfwgw.jpg')
             p.light-text.font-small Recipes
         form(action='/glazes/firing-temp' method='get')
           button(type='submit')
             img(src='/images/cone.png')
-            //- img(src='http://i59.tinypic.com/2uoorw4.png')
             p.light-text.font-small Cone
         form(action='/glazes/surface' method='get')
           button(type='submit')
             img(src='/images/surface.png')
-            //- img(src='http://i57.tinypic.com/2zfkbj4.png')
             p.light-text.font-small Surface
         
       .medium-4.columns.main.secondary-nav

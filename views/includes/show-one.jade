@@ -1,94 +1,94 @@
-.row 
-  .medium-2.columns
-    .image
-      p IMG
-  .medium-7.columns.content-h1
-    h1 #{oneRecipe.title}
-  .medium-3.columns
+.row.show-one
+  .medium-9.columns
     .row
-      .medium-6.columns
-        form(action='/glazes/' + oneRecipe._id + '/edit')
-          input.circle(type='submit' value='Edit')
-      .medium-6.columns
-        form(action='/glazes/' + oneRecipe._id + '/delete' method='post')
-          input.circle(type='submit' value='Delete')
+      if oneRecipe.favorite
+        .medium-1.columns.show-top-margin
+          i.fa.fa-heart
+        .medium-11.columns.show-h1
+          h1= oneRecipe.title
+      else 
+        .medium-12.columns.show-h1
+          h1= oneRecipe.title
+  
+  .medium-3.columns.show-top-margin
+    .medium-6.columns
+      form(action='/glazes/' + oneRecipe._id + '/edit')
+        button.edit-button(type='submit' title='Edit')
+          i.fa.fa-pencil-square-o
+    .medium-6.columns
+      form(action='/glazes/' + oneRecipe._id + '/delete' method='post')
+        button.delete-button(type='submit' title='Delete')
+          i.fa.fa-trash-o
+hr
+
 .row
-  .medium-4.columns.attributes
-    p Temperature Range 
-      br
-      #{oneRecipe.tempRange}
-    p Cone 
-      br
-      #{oneRecipe.cone}
-    p Type of Firing
-      br
-      #{oneRecipe.firingType}
-    p Surface
-      br
-      #{oneRecipe.surface}
-    p Opacity
-      br
-      #{oneRecipe.opacity}
-    p Color 
-      br
-      #{oneRecipe.color}
-    p Specialty 
-      br
-      #{oneRecipe.specialty}
-    p Tested 
-      br
-      #{oneRecipe.tested}
-  .medium-8.columns
+  .medium-7.columns
     .row
-      .medium-9.columns
-        h3 Base Ingredients
-        p.line #{ingredients[0]}
-        p.line #{ingredients[1]}
-        p.line #{ingredients[2]}
-        p.line #{ingredients[3]}
-        p.line #{ingredients[4]}
-        p.line #{ingredients[5]}
-        p.line #{ingredients[6]}
-        p.line #{ingredients[7]}
-        p.line #{ingredients[8]}
-        p.line #{ingredients[9]}
-      .medium-3.columns
-        h3 Amount
-        p.line #{amounts[0]}
-        p.line #{amounts[1]}
-        p.line #{amounts[2]}
-        p.line #{amounts[3]}
-        p.line #{amounts[4]}
-        p.line #{amounts[5]}
-        p.line #{amounts[6]}
-        p.line #{amounts[7]}
-        p.line #{amounts[8]}
-        p.line #{amounts[9]}
+      .medium-12.columns.show-one
+        h3.fc Base Ingredients
+        .row
+          .medium-8.columns.show-ingredients
+            if oneRecipe.ingredients
+              for val in oneRecipe.ingredients
+                if val
+                  input(type='checkbox' id=val)
+                  label(for=val) #{val}
+                  hr.show-underline
+          .medium-4.columns.show-ingredients
+            if oneRecipe.amounts
+              for val in oneRecipe.amounts
+                if val
+                  input.hidden(type='checkbox' id=val)
+                  label(for=val) #{val}
+                  hr.underline
     .row
-      .medium-9.columns
+      .medium-12.columns.show-one
         h3 Additional Ingredients
-        p.line #{addIngredients[0]}
-        p.line #{addIngredients[1]}
-        p.line #{addIngredients[2]}
-        p.line #{addIngredients[3]}
-        p.line #{addIngredients[4]}
-        p.line #{addIngredients[5]}
-      .medium-3.columns
-        h3 Amount
-        p.line #{addAmounts[0]}
-        p.line #{addAmounts[1]}
-        p.line #{addAmounts[2]}
-        p.line #{addAmounts[3]}
-        p.line #{addAmounts[4]}
-        p.line #{addAmounts[5]}
-    .row
-      .medium-12.columns.notes
-        h3 Notes
-        textarea(name='notes' rows=6) #{oneRecipe.notes}
+        .row
+          .medium-8.columns.show-ingredients
+            if oneRecipe.addIns
+              for val in oneRecipe.addIns
+                if val
+                  input(type='checkbox' id=val)
+                  label(for=val) #{val}
+                  hr.show-underline
+          .medium-4.columns.show-ingredients
+            if oneRecipe.addAmounts
+              for val in oneRecipe.addAmounts
+                if val
+                  input.hidden(type='checkbox' id=val)
+                  label(for=val) #{val}
+                  hr.underline
+    
+  .medium-5.columns
+    .attributes
+      h4 Firing Temperature
+        span= oneRecipe.tempRange
+      h4 Cone
+        span= oneRecipe.cone
+      h4 Type of Firing
+        span= oneRecipe.firingType
+      h4 Surface
+        span= oneRecipe.surface
+      h4 Opacity
+        span= oneRecipe.opacity
+      h4 Color
+        span= oneRecipe.color
+      h4 Specialty Glaze
+        span= oneRecipe.specialty
+      h4 Test Status
+        span= oneRecipe.testStatus
+    
+.row.show-one
+  .medium-7.columns
+    h3 Notes
+    p.show-notes= oneRecipe.notes
+  .medium-5.columns
+    h3 Image
+    .img-placeholder
+
 .row
   .medium-12.columns.footer
-
-
 
 
 

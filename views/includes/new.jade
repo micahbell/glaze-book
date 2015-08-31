@@ -179,22 +179,25 @@ form.add-new(action='/show-all' method='post')
         h4 Additional Information
         i.fa.fa-angle-down#top
         i.fa.fa-angle-down#bottom
-        select(id='specialty' name='specialty')
-          option(disabled selected) Specialty Glaze
-          option Crystalline
-          option Metallic
-          option Luster
-          option Texture
-          option Rivulet
-          option Slip
-          option Stain
-          option Engobe
-        
-        select(id='test-status' name='test_status')
-          option(disabled selected) Test Status
-          option Tested
-          option Untested
-          option In Progress
+        .row
+          .medium-12.columns
+            select(id='specialty' name='specialty')
+              option(disabled selected) Specialty Glaze
+              option Crystalline
+              option Metallic
+              option Luster
+              option Texture
+              option Rivulet
+              option Slip
+              option Stain
+              option Engobe
+        .row
+          .medium-12.columns
+            select(id='test-status' name='test_status')
+              option(disabled selected) Test Status
+              option Tested
+              option Untested
+              option In Progress
           
         label(for='image') 
           h4.upload Upload Image
