@@ -222,7 +222,20 @@ hr {
   margin-top: 14px;
 }
 
-.content .search-bar {
+.content .title {
+  margin: 0px;
+  position: relative;
+  left: 48px;
+  bottom: 2px;
+  font-size: 1.675em;
+  font-weight: 300;
+  /*font-weight: 200;*/
+}
+/*h1 { font-size: 3.157em; margin-top: 0; }
+h2 { font-size: 2.369em; }
+h3 { font-size: 1.777em; }
+h4 { font-size: 1.333em; }*/
+/*.content .search-bar {
   border-radius: 4px;
   border: 1px solid #999;
   padding: 3.5px 7px;
@@ -239,7 +252,7 @@ hr {
   right: -10px;
   padding-left: 0px;
   color: #999;
-}
+}*/
 
 .content .logout button {
   padding: 7px 14px;

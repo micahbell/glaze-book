@@ -39,10 +39,11 @@ block content
           
       .medium-7.columns.main.content
         .row.header
-          .medium-push-7.medium-3.columns.search-bar
-            input(type='text' placeholder='Search' name='search')
-            button(type='submit') 
-              i.fa.fa-search 
+          .medium-push-6.medium-4.columns
+            p.title the glazebook
+            //- input(type='text' placeholder='Search' name='search')
+            //- button(type='submit') 
+            //-   i.fa.fa-search 
           .medium-2.columns.logout
             if currentUser
               form(action='/logout' method='post')
