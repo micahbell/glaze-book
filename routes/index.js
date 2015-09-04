@@ -230,12 +230,12 @@ router.get('/glazes/favorites', function(req, res, next) {
 
 // Recently Added ====================
 router.get('/glazes/recently-added', function(req, res, next) {
-//   $natural: -1 ?
-//   userCollection.findOne({ email: req.cookies.userEmail }, function(err, recentRecipe) {
-//     console.log('++++++++++++++++++++', recentRecipe);
-//     var recipeArray = recentRecipe.glazeRecipes;
-//     console.log('--------------------', recipeArray);
-//   });
+  $natural: -1 ?
+  userCollection.findOne({ email: req.cookies.userEmail }, function(err, recentRecipe) {
+    console.log('++++++++++++++++++++', recentRecipe);
+    var recipeArray = recentRecipe.glazeRecipes;
+    console.log('--------------------', recipeArray);
+  });
 });
 
 // Show One ====================
