@@ -231,12 +231,19 @@ router.get('/glazes/favorites', function(req, res, next) {
 // Recently Added ====================
 router.get('/glazes/recently-added', function(req, res, next) {
   // $natural: -1 ?
-  // userCollection.findOne({ email: req.cookies.userEmail }, function(err, recentRecipe) {
-  //   console.log('++++++++++++++++++++', recentRecipe);
-  //   var recipeArray = recentRecipe.glazeRecipes;
-  //   console.log('--------------------', recipeArray);
-  // });
+  userCollection.findOne({ email: req.cookies.userEmail }).sort({ $natural: -1 }, function(err, recipes) {
+    if(!recipes) {
+      res.redirect('/glazes');
+    } else {
+      res.render('glazes', {
+        currentUser: req.cookies.currentUser,
+        recipes: recipes.glazeRecipes
+      })
+    };
+  });
 });
+
+// db.collection.find( { $query: {}, $orderby: { age : -1 } } )
 
 // Show One ====================
 router.get('/glazes/:id', function(req, res, next) {

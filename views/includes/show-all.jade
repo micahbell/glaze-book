@@ -8,8 +8,8 @@
   for val in recipes
     .row.recipe
       .medium-2.columns.image
-        img.glaze-test(src='/images/reitz-blue-green.jpg')
-        //- img.glaze-test(src='/images/colors/' + val.color + '.png')
+        //- img.glaze-test(src='/images/reitz-blue-green.jpg')
+        img.glaze-test(src='/images/colors/' + val.color + '.png')
       .medium-9.columns
         a(href='/glazes/' + val._id) 
           h3 #{val.title}
