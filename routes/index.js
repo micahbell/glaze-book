@@ -229,19 +229,19 @@ router.get('/glazes/favorites', function(req, res, next) {
 });
 
 // Recently Added ====================
-router.get('/glazes/recently-added', function(req, res, next) {
+// router.get('/glazes/recently-added', function(req, res, next) {
   // $natural: -1 ?
-  userCollection.findOne({ email: req.cookies.userEmail }).sort({ $natural: -1 }, function(err, recipes) {
-    if(!recipes) {
-      res.redirect('/glazes');
-    } else {
-      res.render('glazes', {
-        currentUser: req.cookies.currentUser,
-        recipes: recipes.glazeRecipes
-      })
-    };
-  });
-});
+//   userCollection.findOne({ email: req.cookies.userEmail }).sort({ $natural: -1 }, function(err, recipes) {
+//     if(!recipes) {
+//       res.redirect('/glazes');
+//     } else {
+//       res.render('glazes', {
+//         currentUser: req.cookies.currentUser,
+//         recipes: recipes.glazeRecipes
+//       })
+//     };
+//   });
+// });
 
 // db.collection.find( { $query: {}, $orderby: { age : -1 } } )
 
