@@ -270,17 +270,17 @@ router.get('/glazes/:id', function(req, res, next) {
 router.get('/glazes/:id/edit', function(req, res, next) {
   userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
     var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
-    var ingredients = recipe.ingredients;
-    var amounts = recipe.amounts;
-    var addIngredients = recipe.addIns;
-    var addAmounts = recipe.addAmounts;
+    // var ingredients = recipe.ingredients;
+    // var amounts = recipe.amounts;
+    // var addIngredients = recipe.addIns;
+    // var addAmounts = recipe.addAmounts;
     if(recipe) {
       res.render('glazes', {
         editRecipe: recipe,
-        ingredients: ingredients,
-        amounts: amounts,
-        addIngredients: addIngredients,
-        addAmounts: addAmounts,
+        ingredients: recipe.ingredients,
+        amounts: recipe.amounts,
+        addIngredients: recipe.addIns,
+        addAmounts:recipe.addAmounts,
         currentUser: req.cookies.currentUser
       });
     };
@@ -291,6 +291,7 @@ router.get('/glazes/:id/edit', function(req, res, next) {
 router.post('/show-all', function(req, res, next) {
   var date = Date();
   var recipeID = userCollection.id();
+  // If req.cookies.userEmail = demo
   userCollection.update({ email: req.cookies.userEmail },
     { $push:
       { glazeRecipes: {
@@ -358,6 +359,7 @@ router.post('/show-all', function(req, res, next) {
 router.post('/glazes/:id/edit', function(req, res, next) {
   userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
     var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
+    // If req.cookies.userEmail = demo
     userCollection.update({ email: req.cookies.userEmail },
       { $pull:
         { glazeRecipes:
@@ -454,6 +456,7 @@ router.post('/glazes/:id/edit', function(req, res, next) {
 router.post('/glazes/:id/delete', function(req, res, next) {
   userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
     var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
+    // If req.cookies.userEmail = demo
     userCollection.update({ email: req.cookies.userEmail },
       { $pull:
         { glazeRecipes:
