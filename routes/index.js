@@ -5,6 +5,11 @@ var userCollection = db.get('users');
 var bcrypt = require('bcryptjs');
 var userValidation = require('../lib/user-validation');
 var database = require('../lib/database');
+var multer  = require('multer');
+var upload = multer({
+  dest: __dirname + '/../public/uploads/',
+  limits: {fileSize: 1000000, files: 1}
+})
 
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -249,17 +254,17 @@ router.get('/glazes/favorites', function(req, res, next) {
 router.get('/glazes/:id', function(req, res, next) {
   userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
     var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
-    var ingredients = recipe.ingredients;
-    var amounts = recipe.amounts;
-    var addIngredients = recipe.addIns;
-    var addAmounts = recipe.addAmounts;
+    // var ingredients = recipe.ingredients;
+    // var amounts = recipe.amounts;
+    // var addIngredients = recipe.addIns;
+    // var addAmounts = recipe.addAmounts;
     if(recipe) {
       res.render('glazes', {
         oneRecipe: recipe,
-        ingredients: ingredients,
-        amounts: amounts,
-        addIngredients: addIngredients,
-        addAmounts: addAmounts,
+        ingredients: recipe.ingredients,
+        amounts: recipe.amounts,
+        addIngredients: recipe.addIns,
+        addAmounts: recipe.addAmounts,
         currentUser: req.cookies.currentUser
       });
     };
@@ -270,10 +275,6 @@ router.get('/glazes/:id', function(req, res, next) {
 router.get('/glazes/:id/edit', function(req, res, next) {
   userCollection.findOne({ email: req.cookies.userEmail }, function(err, recipe) {
     var recipe = database.recipeFinder(req.params.id, recipe.glazeRecipes);
-    // var ingredients = recipe.ingredients;
-    // var amounts = recipe.amounts;
-    // var addIngredients = recipe.addIns;
-    // var addAmounts = recipe.addAmounts;
     if(recipe) {
       res.render('glazes', {
         editRecipe: recipe,
@@ -288,71 +289,74 @@ router.get('/glazes/:id/edit', function(req, res, next) {
 });
 
 // Show All ====================
-router.post('/show-all', function(req, res, next) {
+router.post('/show-all', upload.single('image'), function(req, res, next) {
   var date = Date();
   var recipeID = userCollection.id();
-  // If req.cookies.userEmail = demo
-  userCollection.update({ email: req.cookies.userEmail },
-    { $push:
-      { glazeRecipes: {
-        _id: recipeID,
-        dateAdded: date,
-        title: req.body.title,
-        favorite: req.body.favorite,
-        tempRange: req.body.temp_range,
-        cone: req.body.cone,
-        firingType: req.body.firing_type,
-        surface: req.body.surface,
-        opacity: req.body.opacity,
-        color: req.body.color,
-        specialty: req.body.specialty,
-        testStatus: req.body.test_status,
-        ingredients: [
-          req.body.ingredient_1,
-          req.body.ingredient_2,
-          req.body.ingredient_3,
-          req.body.ingredient_4,
-          req.body.ingredient_5,
-          req.body.ingredient_6,
-          req.body.ingredient_7,
-          req.body.ingredient_8,
-          req.body.ingredient_9,
-          req.body.ingredient_10
-        ],
-        amounts: [
-          req.body.amount_1,
-          req.body.amount_2,
-          req.body.amount_3,
-          req.body.amount_4,
-          req.body.amount_5,
-          req.body.amount_6,
-          req.body.amount_7,
-          req.body.amount_8,
-          req.body.amount_9,
-          req.body.amount_10
-        ],
-        addIns: [
-          req.body.add_in_1,
-          req.body.add_in_2,
-          req.body.add_in_3,
-          req.body.add_in_4,
-          req.body.add_in_5,
-          req.body.add_in_6
-        ],
-        addAmounts: [
-          req.body.add_amount_1,
-          req.body.add_amount_2,
-          req.body.add_amount_3,
-          req.body.add_amount_4,
-          req.body.add_amount_5,
-          req.body.add_amount_6
-        ],
-        notes: req.body.notes,
-        image: req.body.image
+  // if(req.cookies.userEmail === 'demo@gmail.com') {
+  //   res.redirect('/glazes/show-all');
+  // } else {
+    userCollection.update({ email: req.cookies.userEmail },
+      { $push:
+        { glazeRecipes: {
+          _id: recipeID,
+          dateAdded: date,
+          title: req.body.title,
+          favorite: req.body.favorite,
+          tempRange: req.body.temp_range,
+          cone: req.body.cone,
+          firingType: req.body.firing_type,
+          surface: req.body.surface,
+          opacity: req.body.opacity,
+          color: req.body.color,
+          specialty: req.body.specialty,
+          testStatus: req.body.test_status,
+          ingredients: [
+            req.body.ingredient_1,
+            req.body.ingredient_2,
+            req.body.ingredient_3,
+            req.body.ingredient_4,
+            req.body.ingredient_5,
+            req.body.ingredient_6,
+            req.body.ingredient_7,
+            req.body.ingredient_8,
+            req.body.ingredient_9,
+            req.body.ingredient_10
+          ],
+          amounts: [
+            req.body.amount_1,
+            req.body.amount_2,
+            req.body.amount_3,
+            req.body.amount_4,
+            req.body.amount_5,
+            req.body.amount_6,
+            req.body.amount_7,
+            req.body.amount_8,
+            req.body.amount_9,
+            req.body.amount_10
+          ],
+          addIns: [
+            req.body.add_in_1,
+            req.body.add_in_2,
+            req.body.add_in_3,
+            req.body.add_in_4,
+            req.body.add_in_5,
+            req.body.add_in_6
+          ],
+          addAmounts: [
+            req.body.add_amount_1,
+            req.body.add_amount_2,
+            req.body.add_amount_3,
+            req.body.add_amount_4,
+            req.body.add_amount_5,
+            req.body.add_amount_6
+          ],
+          notes: req.body.notes,
+          image: req.file
+        }
       }
-    }
-  });
-  res.redirect('/glazes/show-all');
+    });
+    res.redirect('/glazes/show-all');
+  // }
 });
 
 // Submit Edit ====================

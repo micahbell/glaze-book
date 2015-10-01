@@ -2,7 +2,7 @@
   .medium-12.columns.content-h1
     h1 Add a Glaze Recipe
 
-form.add-new(action='/show-all' method='post')
+form.add-new(action='/show-all' method='post' enctype="multipart/form-data")
   .row.new-title
     .medium-10.columns
       label(for='title') 

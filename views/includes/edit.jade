@@ -157,7 +157,10 @@ form.edit(action='/glazes/' + editRecipe._id + '/edit' method='post')
         
         label(for='image')
           h4.upload Upload Image  
-        input(type='file' id='image' name='image')
+        if editRecipe.image
+          input(type='file' id='image' value=editRecipe.image.filename name='image')
+        else 
+          input(type='file' id='image' name='image')
         
   .row.submit-button
     .medium-12.columns

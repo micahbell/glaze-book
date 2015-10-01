@@ -85,7 +85,10 @@ hr
     p.show-notes= oneRecipe.notes
   .medium-5.columns
     h3 Image
-    .img-placeholder
+    if oneRecipe.image
+      img(src='../../uploads/' + oneRecipe.image.filename)
+    else 
+      img(src='/images/colors/' + oneRecipe.color + '.png')
 
 .row
   .medium-12.columns.footer
